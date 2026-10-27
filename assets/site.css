@@ -1,0 +1,98 @@
+/* DeckReady site — scroll story (2026-10-27). Ported 1:1 from the approved mockup
+   site_mockup_story.dc.html; additions are marked "port:". No build step. */
+
+body{margin:0;background:#FFFFFF;font-family:Inter,system-ui,sans-serif;color:#15191D;font-size:16px;line-height:1.5;overflow-x:clip}
+a{color:#0A7A55}a:hover{color:#065C40}
+html{scroll-behavior:smooth}                               /* port: #download / #story links */
+:focus-visible{outline:2px solid #0A7A55;outline-offset:3px;border-radius:6px}   /* port: keyboard */
+
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes spinRev{to{transform:rotate(-360deg)}}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes popIn{0%{opacity:0;transform:scale(.6)}70%{opacity:1;transform:scale(1.08)}100%{opacity:1;transform:scale(1)}}
+@keyframes sceneIn{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes rowIn8{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+@keyframes recMove{from{offset-distance:0%}to{offset-distance:100%}}
+@keyframes recLook{0%{opacity:0;transform:scale(.6)}15%{opacity:1;transform:scale(1)}85%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(.6)}}
+@keyframes bumpA{from{transform:scale(1.15)}to{transform:scale(1)}}
+@keyframes bumpB{from{transform:scale(1.15)}to{transform:scale(1)}}
+@keyframes noteA{0%{opacity:1;transform:translateY(0) scale(.8)}50%{opacity:.75}100%{opacity:0;transform:translateY(-10px) scale(1)}}
+@keyframes noteB{0%{opacity:1;transform:translateY(0) scale(.8)}50%{opacity:.75}100%{opacity:0;transform:translateY(-10px) scale(1)}}
+@keyframes badgeLife{0%,76%{opacity:1}100%{opacity:0}}
+@keyframes collapseRow{0%,40%{background:#C6EED9;height:34px;opacity:1}100%{background:#C6EED9;height:0;opacity:0}}
+@keyframes playhead{from{width:0%}to{width:100%}}
+@keyframes toTrash{0%{opacity:1;transform:none}100%{opacity:0;transform:translate(150px,170px) scale(.15)}}
+@keyframes trashBounce{0%,100%{transform:none}35%{transform:translateY(-6px) rotate(-14deg)}70%{transform:rotate(8deg)}}
+@keyframes chipFly{0%{opacity:0;transform:translate(var(--fx),var(--fy)) scale(.5)}25%{opacity:1}100%{opacity:1;transform:none}}
+@keyframes glowPulse{0%,100%{box-shadow:0 0 0 0 rgba(46,229,157,0)}50%{box-shadow:0 0 0 8px rgba(46,229,157,.18)}}
+@keyframes barFill{from{width:0}}
+@keyframes orbit{to{transform:rotate(360deg)}}
+@keyframes counterOrbit{to{transform:rotate(-360deg)}}
+@keyframes dash{to{stroke-dashoffset:0}}
+@keyframes shimmer{from{background-position:200% 0}to{background-position:-200% 0}}
+@keyframes eq{0%,100%{transform:scaleY(.3)}50%{transform:scaleY(1)}}
+.spin{animation:spin 6s linear infinite}
+.spin-slow{animation:spin 18s linear infinite}
+.spin-fast{animation:spin .9s linear infinite;transform-origin:50% 50%}
+.float{animation:floatY 6s ease-in-out infinite}
+.fade-up{animation:fadeUp .6s cubic-bezier(.2,.8,.2,1) both}
+.pop{animation:popIn .5s cubic-bezier(.2,.8,.2,1) both}
+.scene-in{animation:sceneIn .55s cubic-bezier(.2,.8,.2,1) both}
+.rowin{animation:rowIn8 .25s cubic-bezier(.2,.8,.2,1) both}
+.rec-move{position:absolute;left:0;top:0;offset-rotate:0deg;offset-anchor:50% 50%;animation:recMove .75s cubic-bezier(.37,0,.63,1) both;pointer-events:none;z-index:6}
+.rec-look{display:block;animation:recLook .75s linear both}
+.rec-turn{display:block;animation:spin 1s linear infinite}
+.bA{animation:bumpA .25s cubic-bezier(.2,.8,.2,1)}.bB{animation:bumpB .25s cubic-bezier(.2,.8,.2,1)}
+.nA{animation:noteA .4s cubic-bezier(.2,.8,.2,1) both}.nB{animation:noteB .4s cubic-bezier(.2,.8,.2,1) both}
+.badge-life{animation:badgeLife 1.3s linear both}
+.collapse{animation:collapseRow .3s ease-in-out both}
+@keyframes collapse30{0%,40%{height:30px;opacity:1}100%{height:0;opacity:0}}
+.collapse30{animation:collapse30 .3s ease-in-out both}
+@keyframes groupOut{from{opacity:1;max-height:200px}to{opacity:0;max-height:0}}
+.collapse-group{animation:groupOut .3s ease-in-out both}
+.to-trash{animation:toTrash .8s cubic-bezier(.5,0,.75,0) both}
+.trash-bounce{animation:trashBounce .6s ease}
+.chip-fly{animation:chipFly .8s cubic-bezier(.2,.8,.2,1) both}
+.glow{animation:glowPulse 1.6s ease-in-out infinite}
+.bar-fill{animation:barFill .9s cubic-bezier(.2,.8,.2,1) both}
+.eqbar{transform-origin:bottom;animation:eq 1.1s ease-in-out infinite}
+.btn{transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s ease}
+.btn:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(10,122,85,.22)}
+.chap{will-change:transform,opacity}
+/* chapter buttons: the mockup's inline styles as classes (.on = active chapter) */
+.navdot{font:inherit;font-size:12px;font-weight:600;cursor:pointer;padding:6px 11px;border-radius:999px;background:#FFFFFF;color:#5B6570;border:1px solid #DCE0E4;transition:all .35s cubic-bezier(.2,.8,.2,1)}
+.navdot.on{background:#15191D;color:#FFFFFF;border-color:#15191D}
+.navdot:not(.on):hover{color:#15191D}       /* port: the mockup's hover also hit the active (dark) button → dark text on dark */
+.dl-card{transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s ease}
+.dl-card:hover{transform:translateY(-6px);box-shadow:0 22px 44px rgba(10,122,85,.18)}
+.dl-icon{transition:transform .3s ease}
+.dl-card:hover .dl-icon{transform:rotate(-8deg) scale(1.1)}
+@keyframes arrowDrop{0%,100%{transform:none}50%{transform:translateY(4px)}}
+.dl-card:hover .dl-arrow{animation:arrowDrop .7s ease infinite}
+.tile{transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s ease}
+.tile:hover{transform:translateY(-4px) rotate(-1deg);box-shadow:0 18px 36px rgba(21,25,29,.10)}
+.stage{zoom:1.28}
+@media (max-width:1380px){.stage{zoom:1.12}}
+@media (max-width:1180px){.stage{zoom:.95}}
+@media (max-width:1020px){.stage{zoom:.82}}
+@media (max-width:900px){
+.story{grid-template-columns:minmax(0,1fr)!important}
+.sticky-col{order:-1;top:64px!important;z-index:5;background:#F4F6F7;padding:6px 0 10px}   /* port: background — chapter text no longer shows through beside the stage */
+.stage{zoom:.62}
+.chap-wrap{min-height:60vh!important}       /* port: the mockup put this on .chap (inner box) — it meant the chapter */
+.h1{font-size:48px!important}
+.three-col{grid-template-columns:minmax(0,1fr)!important}
+.side-nav{display:none!important}
+.story-h2{font-size:48px!important}          /* port: 72 / 52 / 56 px headings are wider than a phone */
+.chap h3{font-size:38px!important}
+.dl-h2{font-size:42px!important}
+}
+@media (max-width:540px){.stage{zoom:.5}.h1{font-size:38px!important}
+.story-wrap{padding-left:16px!important;padding-right:16px!important}   /* port: 640 × .5 + 2 × 16 fits 375 px */
+.story-h2{font-size:36px!important}.chap h3{font-size:30px!important}.chap p{font-size:17px!important}
+.dl-h2{font-size:34px!important}.dl-box{padding:48px 18px!important}
+#download{padding:72px 16px!important}
+}
+@media (max-width:400px){.stage{zoom:.44}}   /* port: 320–400 px phones */
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}

@@ -58,599 +58,200 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg:#0A0C0E;
-    --surface:#171B1F;
-    --surface-2:#111417;
-    --line:#262B31;
-    --ink:#ECEFF1;
-    --muted:#8C969E;
-    --aqua:#2EE59D;
-    --aqua-dim:#1F9E6C;
-    --amber:#F2B544;
-    --aqua-hi:#5CEDB4;
-    --on-aqua:#04140D;
-    --ghost:#8C969E;
-    --nav-bg:rgba(10,12,14,.82);
-    --acc-rgb:46,229,157;
-    --amb-rgb:242,181,68;
-    --muted-rgb:140,150,158;
-    --mx:50%; --my:30%;
-    --radius:12px;
-    --maxw:1080px;
-    --sans:"Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
-    --display:"Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
-    --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{
-    background:var(--bg);
-    color:var(--ink);
-    font-family:var(--sans);
-    font-size:17px;
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
-  a{color:inherit;text-decoration:none}
-  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
-  .mono{font-family:var(--mono)}
-
-  /* ---- nav ---- */
-  header.nav{
-    position:sticky;top:0;z-index:50;
-    backdrop-filter:blur(10px);
-    background:var(--nav-bg);
-    border-bottom:1px solid var(--line);
-  }
-  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
-  .brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:700;font-size:17px;letter-spacing:-.01em}
-  .brand .mark{width:28px;height:28px;flex:none}
-  .brand .w-ready{color:var(--aqua)}
-  .nav-links{display:flex;align-items:center;gap:28px;font-size:15px;color:var(--muted)}
-  .nav-links a:hover{color:var(--ink)}
-  .nav-links .btn-mini{
-    color:var(--on-aqua);background:var(--aqua);font-weight:600;
-    padding:8px 16px;border-radius:8px;
-  }
-  .nav-links .btn-mini:hover{background:var(--aqua-hi)}
-  @media(max-width:640px){.nav-links a:not(.btn-mini){display:none}}
-
-  /* ---- hero ---- */
-  .hero{position:relative;padding:88px 0 72px}
-  .hero h1{
-    font-family:var(--display);font-weight:700;
-    font-size:clamp(38px,6.4vw,64px);line-height:1.03;
-    letter-spacing:-.025em;max-width:14ch;
-  }
-  .hero .lede{margin-top:22px;font-size:clamp(17px,2.2vw,20px);color:var(--muted);max-width:52ch}
-  .cta-row{display:grid;grid-template-columns:auto auto auto;justify-content:start;column-gap:14px;row-gap:8px;margin-top:34px}
-  .btn{
-    display:inline-flex;align-items:center;gap:11px;
-    font-weight:600;font-size:16px;
-    padding:14px 22px;border-radius:8px;
-    border:1px solid transparent;cursor:pointer;
-    transition:transform .12s ease,background .15s ease,border-color .15s ease;
-  }
-  .btn svg{width:19px;height:19px;flex:none}
-  .btn-primary{background:var(--aqua);color:var(--on-aqua)}
-  .btn-primary:hover{background:var(--aqua-hi);transform:translateY(-1px)}
-  .btn-ghost{background:var(--surface);color:var(--ink);border-color:var(--line)}
-  .btn-ghost:hover{border-color:var(--aqua-dim);transform:translateY(-1px)}
-  .btn .rec{font-family:var(--mono);font-size:11px;color:var(--on-aqua);background:rgba(0,0,0,.14);padding:2px 6px;border-radius:5px;margin-left:2px}
-  .meta-note{margin-top:16px;color:var(--muted);font-size:14px;font-family:var(--mono)}
-  .meta-note b{color:var(--ink);font-weight:500}
-  /* Mac buttons: 2nd line "Apple silicon · M1 and newer" / "Intel processor" inside the button;
-     the "which Mac do I have" note sits under both (grid row 2, columns 1–2). Row 1 stretches, so
-     all buttons stay the same height. ≤900px: two columns (Windows drops under the note). */
-  .btn-label{display:flex;flex-direction:column;align-items:flex-start;line-height:1.2}
-  .btn-sub{font-size:.8em;font-weight:500;opacity:.85;margin-top:3px}
-  .cta-row > .dl-note{grid-column:1 / span 2;grid-row:2;max-width:56ch}
-  .download .cta-row > .dl-note{justify-self:center}
-  @media(max-width:900px){.cta-row{grid-template-columns:auto auto}}
-  .dl-note{color:var(--muted);font-size:13px;line-height:1.45}
-  .download .dl-note{text-align:center}
-  @media(max-width:640px){
-    .cta-row{grid-template-columns:auto}
-    .cta-row > .dl-note{grid-column:auto;grid-row:auto;margin-bottom:6px;max-width:none}
-  }
-
-
-  /* ---- features ---- */
-  section.features{padding:96px 0 20px}
-  .sec-head{max-width:46ch}
-  .sec-head h2{font-family:var(--display);font-weight:600;font-size:clamp(26px,3.6vw,34px);letter-spacing:-.02em}
-  .sec-head p{color:var(--muted);margin-top:12px}
-  .flist{margin-top:44px;display:grid;gap:14px;perspective:900px}
-  .feat{--fx:50%;--fy:50%;--rx:0deg;--ry:0deg;position:relative;background:var(--surface-2);border:1px solid var(--line);border-radius:var(--radius);padding:30px 28px;display:grid;grid-template-columns:34px minmax(0,1fr);gap:20px;align-items:start;
-    transform:rotateX(var(--rx)) rotateY(var(--ry));transition:transform .5s cubic-bezier(.2,.8,.2,1),border-color .3s;transform-style:preserve-3d;overflow:hidden}
-  .feat::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s;
-    background:radial-gradient(340px circle at var(--fx) var(--fy),rgba(var(--acc-rgb),.13),transparent 60%)}
-  body.fx-tilt .feat:hover{border-color:var(--aqua-dim);transition:transform .08s linear,border-color .3s}
-  body.fx-tilt .feat:hover::before{opacity:1}
-  .feat .ic{color:var(--aqua);margin-top:2px}
-  .feat .ic svg{width:26px;height:26px}
-  .feat h3{font-family:var(--display);font-weight:600;font-size:19px;letter-spacing:-.01em}
-  .feat p{color:var(--muted);margin-top:6px;font-size:15.5px;max-width:60ch}
-  @media(min-width:760px){.flist{grid-template-columns:1fr 1fr}}
-
-  /* ---- download cta ---- */
-  section.download{padding:104px 0 96px;text-align:center}
-  .download h2{font-family:var(--display);font-weight:700;font-size:clamp(30px,4.6vw,44px);letter-spacing:-.025em}
-  .download p{color:var(--muted);margin-top:14px;font-size:18px}
-  .download .cta-row{justify-content:center;margin-top:32px}
-
-  /* ---- footer ---- */
-  footer{border-top:1px solid var(--line);padding:34px 0;color:var(--muted);font-size:14px}
-  .foot-inner{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
-  .foot-inner a:hover{color:var(--ink)}
-  .disclaimer{font-size:12.5px;max-width:60ch;line-height:1.5}
-
-  :focus-visible{outline:2px solid var(--aqua);outline-offset:3px;border-radius:6px}
-
-  /* ---- effect 2: cursor glow ---- */
-  .glow{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:0;transition:opacity .4s ease;
-    background:radial-gradient(520px circle at var(--mx) var(--my),rgba(var(--acc-rgb),.10),transparent 60%)}
-  body.fx-glow .glow{opacity:1}
-  main,footer{position:relative;z-index:1}
-
-  /* ---- effect 5b: breathing primary button ---- */
-  @keyframes breathe{0%,100%{box-shadow:0 0 0 0 rgba(var(--acc-rgb),.0),0 8px 30px -10px rgba(var(--acc-rgb),.35)}50%{box-shadow:0 0 0 6px rgba(var(--acc-rgb),.10),0 10px 40px -8px rgba(var(--acc-rgb),.55)}}
-  body.fx-reveal .btn-primary{animation:breathe 3.2s ease-in-out infinite}
-  /* magnetic pull is set by JS via --bx/--by */
-  body.fx-reveal .btn{transform:translate(var(--bx,0),var(--by,0))}
-  body.fx-reveal .btn:hover{transform:translate(var(--bx,0),calc(var(--by,0px) - 1px))}
-
-  /* ---- effect 3: the tagging demo (a mini version of the app's scan) ---- */
-  .demo{margin-top:56px}
-  .card{background:linear-gradient(180deg,var(--surface),var(--surface-2));border:1px solid var(--line);border-radius:var(--radius);padding:20px 20px 22px;box-shadow:0 24px 60px -30px rgba(0,0,0,.8);position:relative;overflow:hidden}
-  .demo-top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
-  .demo-label{font-family:var(--mono);font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;display:flex;align-items:center;gap:10px}
-  .demo-label .chip{padding:2px 8px;border-radius:6px;border:1px solid var(--line);transition:all .3s}
-  .demo-label .chip.on{color:var(--aqua);border-color:var(--aqua-dim);background:rgba(var(--acc-rgb),.07)}
-  .replay{font-family:var(--mono);font-size:12px;color:var(--aqua);background:transparent;border:1px solid var(--aqua-dim);border-radius:7px;padding:4px 10px;cursor:pointer}
-  .replay:hover{background:rgba(var(--acc-rgb),.08)}
-  .trk{display:grid;grid-template-columns:64px minmax(0,1fr);gap:18px;align-items:center}
-  .art{width:64px;height:64px;border-radius:8px;border:1px dashed var(--line);background:var(--surface-2);display:grid;place-items:center;color:var(--muted);font-family:var(--mono);font-size:11px;position:relative;overflow:hidden}
-  .art .cover{position:absolute;inset:0;opacity:0;transform:scale(1.15);transition:opacity .5s ease,transform .6s cubic-bezier(.2,.8,.2,1);
-    background:conic-gradient(from 210deg at 35% 40%,var(--aqua),var(--aqua-dim),var(--amber),var(--surface),var(--aqua))}
-  .art .cover{background:url(data:image/jpeg;base64,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) center/cover no-repeat}
-  .trk.done .art{border-style:solid;border-color:var(--aqua-dim)}
-  .trk.done .art .cover{opacity:1;transform:scale(1)}
-  .fname{font-family:var(--mono);font-size:14px;color:var(--muted);overflow-wrap:anywhere}
-  .title-line{font-family:var(--display);font-weight:600;font-size:clamp(17px,2.4vw,21px);letter-spacing:-.01em;min-height:1.4em;margin-top:2px}
-  .title-line .ph{color:var(--ghost)}
-  .title-line .new{animation:pop .45s cubic-bezier(.2,1.4,.4,1)}
-
-  .wf-wrap{position:relative;margin-top:18px;height:84px;border-radius:9px;background:var(--surface-2);border:1px solid var(--line);overflow:hidden;cursor:crosshair}
-  #wf{display:block;width:100%;height:100%}
-  .wf-t{position:absolute;bottom:4px;font-family:var(--mono);font-size:10.5px;color:var(--muted);pointer-events:none;font-variant-numeric:tabular-nums}
-  .wf-t.l{left:8px}.wf-t.r{right:8px}
-
-  .steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:12px}
-  .step{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;color:var(--muted);padding:8px 10px;border:1px solid var(--line);border-radius:8px;min-width:0;transition:color .3s,border-color .3s,background .3s}
-  .step span:last-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .step .ic{width:14px;height:14px;border-radius:50%;border:1.5px solid var(--line);flex:none;position:relative;transition:all .3s}
-  .step.active{color:var(--ink);border-color:rgba(var(--amb-rgb),.5);background:rgba(var(--amb-rgb),.05)}
-  .step.active .ic{border-color:var(--amber);border-top-color:transparent;animation:spin .7s linear infinite}
-  .step.done{color:var(--aqua);border-color:var(--aqua-dim)}
-  .step.done .ic{border-color:var(--aqua);background:var(--aqua)}
-  .step.done .ic::after{content:"";position:absolute;left:3.5px;top:1px;width:3.5px;height:7px;border:solid var(--on-aqua);border-width:0 1.8px 1.8px 0;transform:rotate(45deg)}
-  @keyframes spin{to{transform:rotate(360deg)}}
-  @media(max-width:640px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
-
-  .cands{margin-top:12px;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:var(--surface-2)}
-  .cands-h{display:flex;justify-content:space-between;gap:10px;padding:7px 12px;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--line)}
-  .cand{display:grid;grid-template-columns:minmax(0,1fr) auto 110px;gap:14px;align-items:center;padding:9px 12px;font-size:14px;border-top:1px solid var(--line);opacity:0;transform:translateX(-10px);transition:opacity .35s ease,transform .35s ease,background .4s}
-  .cand:first-of-type{border-top:0}
-  .cand.in{opacity:1;transform:none}
-  .cand.lose{opacity:.38}
-  .cand.win{background:rgba(var(--acc-rgb),.07)}
-  .cand .nm{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .cand .nm i{font-style:normal;color:var(--muted)}
-  .cand.win .nm i{color:var(--aqua)}
-  .cand .len{font-family:var(--mono);font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums}
-  .cand .len.ok{color:var(--aqua)}
-  .cand .pct{display:grid;grid-template-columns:minmax(0,1fr) 38px;gap:8px;align-items:center;font-family:var(--mono);font-size:12.5px;font-variant-numeric:tabular-nums;text-align:right}
-  .cand .bar{height:4px;border-radius:2px;background:var(--line);overflow:hidden}
-  .cand .bar b{display:block;height:100%;width:0;background:var(--muted);border-radius:2px}
-  .cand.win .bar b{background:var(--aqua)}
-  .cand.win .pct{color:var(--aqua)}
-  @media(max-width:560px){.cand{grid-template-columns:minmax(0,1fr) 84px}.cand .len{display:none}}
-
-  .fields{display:grid;grid-template-columns:minmax(0,2.2fr) repeat(2,minmax(0,.8fr)) minmax(0,1.2fr);gap:8px;margin-top:12px}
-  .fld{background:var(--surface-2);border:1px solid var(--line);border-radius:9px;padding:9px 12px;min-width:0;transition:border-color .35s ease,background .35s ease}
-  .fld .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-  .fld .v{font-family:var(--mono);font-size:15px;font-variant-numeric:tabular-nums;color:var(--ghost);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .fld.on{border-color:var(--aqua-dim);background:rgba(var(--acc-rgb),.05)}
-  .fld.on .v{color:var(--ink);animation:pop .45s cubic-bezier(.2,1.4,.4,1)}
-  .fld.key.on .v{color:var(--aqua)}
-  @keyframes pop{0%{transform:translateY(6px);opacity:0}100%{transform:none;opacity:1}}
-  @media(max-width:560px){.fields{grid-template-columns:repeat(2,minmax(0,1fr))}.fields .fld:first-child{grid-column:1/-1}}
-  .status{display:flex;align-items:center;gap:10px;margin-top:14px;font-family:var(--mono);font-size:12.5px;color:var(--muted);min-height:20px}
-  .status .dot{width:8px;height:8px;border-radius:50%;background:var(--line);flex:none;transition:background .3s}
-  .status.busy{color:var(--amber)}
-  .status.busy .dot{background:var(--amber);animation:blink .6s steps(2) infinite}
-  .status.ok .dot{background:var(--aqua)}
-  .status.ok{color:var(--aqua)}
-  @keyframes blink{50%{opacity:.25}}
-
-
-  /* ---- effect 5a: reveal on scroll (starts visible; only moves) ---- */
-  .rv{transition:transform .8s cubic-bezier(.2,.8,.2,1),opacity .8s ease}
-  body.fx-reveal .rv.pre{transform:translateY(28px);opacity:.25}
-  @media(prefers-reduced-motion:reduce){
-    .btn:hover{transform:none}
-    body .btn-primary{animation:none!important}
-    body.fx-reveal .rv.pre{transform:none;opacity:1}
-    .feat{transform:none!important}
-    html{scroll-behavior:auto}
-  }
-</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<script src="assets/site.js" defer></script>
 </head>
 <body>
-<div class="glow" aria-hidden="true"></div>
 
-<header class="nav">
-  <div class="wrap nav-inner">
-    <a class="brand" href="#top">
-      <svg class="mark" viewBox="0 0 100 100" width="28" height="28" aria-hidden="true"><circle cx="45" cy="45" r="42" fill="#161A1E"/><circle cx="45" cy="45" r="30" fill="none" stroke="#2A3036" stroke-width="3"/><circle cx="45" cy="45" r="12" fill="#2EE59D"/><g transform="translate(66 70) rotate(-35)"><path d="M0 -13 H24 A5 5 0 0 1 29 -8 V8 A5 5 0 0 1 24 13 H0 L-13 0 Z" fill="#2EE59D" stroke="#0A0C0E" stroke-width="4" stroke-linejoin="round"/></g></svg>
-      <span>Deck<span class="w-ready">Ready</span></span>
-    </a>
-    <nav class="nav-links">
-      <a href="#features">Features</a>
-      <a href="#get" class="btn-mini">Download</a>
-    </nav>
-  </div>
+<!-- NAV -->
+<header style="position: sticky; top: 0; z-index: 20; background: rgba(255,255,255,.82); backdrop-filter: saturate(1.6) blur(14px); -webkit-backdrop-filter: saturate(1.6) blur(14px); border-bottom: 1px solid #ECEEF1">
+<div style="max-width: 1240px; margin: 0 auto; padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px">
+<a href="#top" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #15191D">
+<svg width="30" height="30" viewBox="0 0 40 40" aria-hidden="true"><g class="spin" style="transform-origin: 18px 20px"><circle cx="18" cy="20" r="16" fill="#15191D"></circle><circle cx="18" cy="20" r="11.5" fill="none" stroke="#2C3238"></circle><circle cx="18" cy="20" r="8" fill="none" stroke="#2C3238"></circle><circle cx="18" cy="20" r="3.6" fill="#2EE59D"></circle></g><path d="M24 22l10-10h5v5l-10 10z" fill="#2EE59D" stroke="#FFFFFF" stroke-width="1.5" stroke-linejoin="round"></path><circle cx="36" cy="15" r="1.3" fill="#15191D"></circle></svg>
+<span style="font-weight: 800; font-size: 18px; letter-spacing: -0.02em">Deck<span style="color: #0A7A55">Ready</span></span>
+</a>
+<a href="#download" class="btn" style="background: #15191D; color: #FFFFFF; text-decoration: none; font-weight: 600; font-size: 14px; padding: 10px 18px; border-radius: 999px">Download free</a>
+</div>
 </header>
 
-<main id="top">
-  <section class="hero">
-    <div class="wrap">
-      <h1>Clean Beatport metadata for your whole library.</h1>
-      <p class="lede">DeckReady scans your local tracks, matches each one on Beatport, and writes back the correct genre, BPM, key, artist and title — with artwork. Built for DJs who keep a tidy library.</p>
+<main>
+<!-- HERO -->
+<section id="top" style="position: relative; overflow: hidden; background: radial-gradient(120% 90% at 50% 0%, #F1FBF6 0%, #FFFFFF 60%)">
+<div style="max-width: 1240px; margin: 0 auto; padding: 80px 24px 40px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 22px; position: relative; z-index: 2">
+<span class="fade-up" style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 999px; background: #FFFFFF; border: 1px solid #DCE0E4; font-size: 13px; font-weight: 600; color: #3A434C">
+<span style="display: flex; align-items: flex-end; gap: 2px; height: 12px"><span class="eqbar" style="width: 2.5px; height: 12px; background: #0A7A55; border-radius: 1px"></span><span class="eqbar" style="width: 2.5px; height: 12px; background: #0A7A55; border-radius: 1px; animation-delay: -.35s"></span><span class="eqbar" style="width: 2.5px; height: 12px; background: #0A7A55; border-radius: 1px; animation-delay: -.7s"></span></span>
+Auto-tagging for DJs
+</span>
+<h1 class="h1 fade-up" style="margin: 0; font-size: 84px; line-height: .98; letter-spacing: -0.045em; font-weight: 900; max-width: 980px; animation-delay: .08s">Your music.<br><span style="background: linear-gradient(90deg, #0A7A55, #2EE59D, #0A7A55); background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shimmer 6s linear infinite">Deck-ready.</span></h1>
+<p class="fade-up" style="margin: 0; font-size: 21px; color: #5B6570; max-width: 640px; animation-delay: .16s">DeckReady matches every track in your folders with Beatport and writes clean artist, title, BPM, key, genre and artwork into the files.</p>
+<div class="fade-up" style="display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; animation-delay: .24s">
+<a href="#download" class="btn" style="display: inline-flex; align-items: center; gap: 10px; background: #0A7A55; color: #FFFFFF; text-decoration: none; font-weight: 700; font-size: 17px; padding: 15px 26px; border-radius: 999px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M4 21h16"></path></svg>Download free</a>
+<a href="#story" class="btn" style="display: inline-flex; align-items: center; gap: 8px; color: #15191D; text-decoration: none; font-weight: 600; font-size: 17px; padding: 15px 24px; border-radius: 999px; border: 1px solid #DCE0E4; background: #FFFFFF">See how it works <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"></path></svg></a>
+</div>
+<p class="fade-up" style="margin: 0; font-size: 13px; color: #5B6570; animation-delay: .3s">Mac · Apple silicon &amp; Intel · Windows</p>
+</div>
 
-      <div class="cta-row">
-        <a class="btn btn-primary mag" id="dl-mac" href="https://github.com/mid30084/deckready-releases/releases/latest/download/DeckReady-mac.dmg">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 12.9c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9s-1.8-.8-3-.8c-1.5 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.2 0 2-1.1 2.8-2.2.9-1.3 1.2-2.5 1.3-2.6-.1 0-2.5-1-2.5-3.8zM14.2 5.9c.6-.8 1.1-1.9.9-3-1 0-2.2.6-2.9 1.5-.6.7-1.1 1.8-1 2.9 1.1.1 2.3-.6 3-1.4z"/></svg>
-          <span class="btn-label"><span>Download for Mac<span id="mac-version-hero" style="font-size:0.75em; opacity:0.7; margin-left:0.4em;"></span></span><span class="btn-sub">Apple silicon · M1 and newer</span></span>
-        </a>
-        <a class="btn btn-ghost mag" id="dl-mac-intel" href="https://github.com/mid30084/deckready-releases/releases/latest/download/DeckReady-mac-intel.dmg">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 12.9c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9s-1.8-.8-3-.8c-1.5 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.2 0 2-1.1 2.8-2.2.9-1.3 1.2-2.5 1.3-2.6-.1 0-2.5-1-2.5-3.8zM14.2 5.9c.6-.8 1.1-1.9.9-3-1 0-2.2.6-2.9 1.5-.6.7-1.1 1.8-1 2.9 1.1.1 2.3-.6 3-1.4z"/></svg>
-          <span class="btn-label"><span>Download for Mac (Intel)<span id="mac-intel-version-hero" style="font-size:0.75em; opacity:0.7; margin-left:0.4em;"></span></span><span class="btn-sub">Intel processor</span></span>
-        </a>
-        <small class="dl-note">Needs macOS 12 or newer. Which Mac do I have? Apple menu → About This Mac: “Chip: Apple M…” = Apple silicon, “Processor: …Intel…” = Intel.</small>
-        <a class="btn btn-ghost mag" id="dl-win" href="https://github.com/mid30084/deckready-releases/releases/latest/download/DeckReady-Setup.exe">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 5.7 10.5 4.7v6.6H3zM11.5 4.5 21 3.2v8.1h-9.5zM3 12.7h7.5v6.6L3 18.3zM11.5 12.7H21v8.1l-9.5-1.3z"/></svg>
-          Download for Windows<span id="win-version-hero" style="font-size:0.75em; opacity:0.7; margin-left:0.4em;"></span>
-        </a>
-      </div>
-      <p class="meta-note">Free · <b>macOS</b> &amp; <b>Windows</b> · MP3, FLAC, AIFF &amp; WAV</p>
+<!-- hero composition: big record, orbiting formats, floating tags (mouse parallax, 3 layers) -->
+<div aria-hidden="true" style="position: relative; height: 470px; margin-top: 10px">
+<div id="hp1" style="position: absolute; left: 50%; top: 20px; width: 420px; height: 420px; margin-left: -210px; transform: translate(0px, 0px); transition: transform .35s cubic-bezier(.2,.8,.2,1)">
+<div class="spin" style="position: absolute; inset: 0; border-radius: 50%; background: repeating-radial-gradient(circle, #1A1F24 0 2px, #22282E 2px 4px); box-shadow: 0 50px 90px rgba(21,25,29,.28)">
+<div style="position: absolute; inset: 140px; border-radius: 50%; background: #2EE59D"></div>
+<div style="position: absolute; inset: 158px; border-radius: 50%; background: radial-gradient(circle, #FFFFFF 0 10px, #2EE59D 11px)"></div>
+<div style="position: absolute; left: 60px; top: 70px; width: 120px; height: 40px; border-radius: 50%; background: radial-gradient(closest-side, rgba(255,255,255,.18), rgba(255,255,255,0)); transform: rotate(-30deg)"></div>
+</div>
+<svg width="150" height="150" viewBox="0 0 40 40" style="position: absolute; right: -58px; top: 40px; filter: drop-shadow(0 18px 24px rgba(10,122,85,.35))"><path d="M6 24L24 6h10v10L16 34z" fill="#2EE59D" stroke="#FFFFFF" stroke-width="1.6" stroke-linejoin="round"></path><circle cx="29.5" cy="10.5" r="2" fill="#15191D"></circle></svg>
+</div>
+<div id="hp2" style="position: absolute; left: 50%; top: 230px; width: 0; height: 0; transform: translate(0px, 0px); transition: transform .45s cubic-bezier(.2,.8,.2,1)">
+<div style="position: absolute; left: -330px; top: -170px; width: 660px; height: 340px; animation: orbit 26s linear infinite">
+<span style="position: absolute; left: 100.0%; top: 50.0%; transform: translate(-50%, -50%);"><span style="display: inline-block; animation: counterOrbit 26s linear infinite"><span class="tile" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 14px; background: #FFFFFF; border: 1px solid #DCE0E4; box-shadow: 0 14px 30px rgba(21,25,29,.10); font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 14px"><span style="width: 10px; height: 10px; border-radius: 3px; background: #2EE59D"></span>MP3</span></span></span>
+<span style="position: absolute; left: 50.0%; top: 100.0%; transform: translate(-50%, -50%);"><span style="display: inline-block; animation: counterOrbit 26s linear infinite"><span class="tile" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 14px; background: #FFFFFF; border: 1px solid #DCE0E4; box-shadow: 0 14px 30px rgba(21,25,29,.10); font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 14px"><span style="width: 10px; height: 10px; border-radius: 3px; background: #2068B8"></span>FLAC</span></span></span>
+<span style="position: absolute; left: 0.0%; top: 50.0%; transform: translate(-50%, -50%);"><span style="display: inline-block; animation: counterOrbit 26s linear infinite"><span class="tile" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 14px; background: #FFFFFF; border: 1px solid #DCE0E4; box-shadow: 0 14px 30px rgba(21,25,29,.10); font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 14px"><span style="width: 10px; height: 10px; border-radius: 3px; background: #B7791F"></span>AIFF</span></span></span>
+<span style="position: absolute; left: 50.0%; top: 0.0%; transform: translate(-50%, -50%);"><span style="display: inline-block; animation: counterOrbit 26s linear infinite"><span class="tile" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 14px; background: #FFFFFF; border: 1px solid #DCE0E4; box-shadow: 0 14px 30px rgba(21,25,29,.10); font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 14px"><span style="width: 10px; height: 10px; border-radius: 3px; background: #C53030"></span>WAV</span></span></span>
+</div>
+</div>
+<div id="hp3" style="position: absolute; inset: 0; transform: translate(0px, 0px); transition: transform .55s cubic-bezier(.2,.8,.2,1)">
+<span class="float" style="position: absolute; left: 12%; top: 8%; display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 12px; background: rgba(255,255,255,.92); border: 1px solid #DCE0E4; box-shadow: 0 16px 34px rgba(21,25,29,.10); font-size: 15px; animation-delay: 0s"><span style="font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: #5B6570">BPM</span><b style="font-weight: 700">124</b></span>
+<span class="float" style="position: absolute; left: 76%; top: 6%; display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 12px; background: rgba(255,255,255,.92); border: 1px solid #DCE0E4; box-shadow: 0 16px 34px rgba(21,25,29,.10); font-size: 15px; animation-delay: -1.5s"><span style="font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: #5B6570">Key</span><b style="font-weight: 700">Am</b></span>
+<span class="float" style="position: absolute; left: 6%; top: 62%; display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 12px; background: rgba(255,255,255,.92); border: 1px solid #DCE0E4; box-shadow: 0 16px 34px rgba(21,25,29,.10); font-size: 15px; animation-delay: -3s"><span style="font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: #5B6570">Genre</span><b style="font-weight: 700">Afro House</b></span>
+<span class="float" style="position: absolute; left: 78%; top: 58%; display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 12px; background: rgba(255,255,255,.92); border: 1px solid #DCE0E4; box-shadow: 0 16px 34px rgba(21,25,29,.10); font-size: 15px; animation-delay: -4.5s"><span style="font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: #5B6570">Artist</span><b style="font-weight: 700">Kaia Moor</b></span>
+<span class="float" style="position: absolute; left: 70%; top: 32%; display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 12px; background: rgba(255,255,255,.92); border: 1px solid #DCE0E4; box-shadow: 0 16px 34px rgba(21,25,29,.10); font-size: 15px; animation-delay: -5s"><span style="font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: #5B6570">Artwork</span><b style="font-weight: 700">600 × 600</b></span>
+</div>
+</div>
+</section>
 
-      <div class="demo rv">
-        <div class="card" id="demo">
-          <div class="demo-top">
-            <span class="demo-label"><span class="chip" id="chip-b">Before</span>→<span class="chip" id="chip-a">After</span></span>
-            <button class="replay" id="replay" type="button">↻ Replay scan</button>
-          </div>
-          <div class="trk" id="trk">
-            <div class="art"><span>no art</span><div class="cover"></div></div>
-            <div style="min-width:0">
-              <div class="fname">Double Disco - How It Feels.mp3</div>
-              <div class="title-line" id="tline"><span class="ph">— no artist · no title —</span></div>
-            </div>
-          </div>
-          <div class="wf-wrap"><canvas id="wf" aria-label="Track waveform"></canvas><span class="wf-t l" id="wf-pos">0:00</span><span class="wf-t r">5:22</span></div>
-          <div class="steps">
-            <div class="step" data-i="0"><span class="ic"></span><span>Read file</span></div>
-            <div class="step" data-i="1"><span class="ic"></span><span>Search Beatport</span></div>
-            <div class="step" data-i="2"><span class="ic"></span><span>Pick the version</span></div>
-            <div class="step" data-i="3"><span class="ic"></span><span>Write tags</span></div>
-          </div>
-          <div class="cands">
-            <div class="cands-h"><span>Beatport results</span><span>match</span></div>
-            <div class="cand" data-p="71"><span class="nm">How It Feels <i>(Extended Mix)</i></span><span class="len">7:04</span><span class="pct"><span class="bar"><b></b></span><span class="n">0%</span></span></div>
-            <div class="cand" data-p="98" data-win="1"><span class="nm">How It Feels <i>(Original Mix)</i></span><span class="len">5:22</span><span class="pct"><span class="bar"><b></b></span><span class="n">0%</span></span></div>
-            <div class="cand" data-p="54"><span class="nm">How It Feels <i>(Radio Edit)</i></span><span class="len">3:12</span><span class="pct"><span class="bar"><b></b></span><span class="n">0%</span></span></div>
-          </div>
-          <div class="fields">
-            <div class="fld" data-v="Melodic House &amp; Techno"><div class="k">Genre</div><div class="v">—</div></div>
-            <div class="fld" data-v="128"><div class="k">BPM</div><div class="v">—</div></div>
-            <div class="fld key" data-v="A"><div class="k">Key</div><div class="v">—</div></div>
-            <div class="fld" data-v="Original Mix"><div class="k">Mix</div><div class="v">—</div></div>
-          </div>
-          <div class="status" id="status"><span class="dot"></span><span id="stext">Waiting to scan</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
+<!-- STORY: sticky app window + chapters -->
+<section id="story" style="position: relative; background: linear-gradient(180deg, #FFFFFF 0%, #F4F6F7 8%, #F4F6F7 92%, #FFFFFF 100%)">
+<div class="story-wrap" style="max-width: 1440px; margin: 0 auto; padding: 60px 32px 40px">
+<div style="text-align: center; display: flex; flex-direction: column; gap: 12px; align-items: center; padding: 50px 0 20px">
+<span style="font-size: 14px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #0A7A55">How it works</span>
+<h2 class="story-h2" style="margin: 0; font-size: 72px; letter-spacing: -0.045em; line-height: 1; font-weight: 900; max-width: 1000px">Everything DeckReady does, one scroll at a time.</h2>
+</div>
+<div class="story" style="display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 56px; align-items: start">
 
-  <section class="features" id="features">
-    <div class="wrap">
-      <div class="sec-head rv">
-        <h2>It reads the track, not just the filename.</h2>
-        <p>Messy exports, wrong mixes, missing genres — DeckReady sorts it out and lets you check every match before it touches a file.</p>
-      </div>
+<!-- chapters -->
+<div>
+<div class="chap-wrap" style="min-height: 82vh; display: flex; flex-direction: column; justify-content: center">
+<div class="chap" style="display: flex; flex-direction: column; gap: 16px; padding: 20px 0">
+<span class="chap-n" style="font-family: 'JetBrains Mono', monospace; font-size: 15px; font-weight: 600; color: #0A7A55">01 · Analyze</span>
+<h3 style="margin: 0; font-size: 52px; line-height: 1.04; letter-spacing: -0.04em; font-weight: 900; color: #15191D">Point it at your folders.</h3>
+<p style="margin: 0; font-size: 20px; line-height: 1.55; color: #5B6570; max-width: 480px">DeckReady reads every MP3, FLAC, AIFF and WAV and sorts each track into a tab: ready to write, needs a look, or nothing to do. Tick the ones you want and write the tags in one click.</p>
+</div>
+</div>
+<div class="chap-wrap" style="min-height: 82vh; display: flex; flex-direction: column; justify-content: center">
+<div class="chap" style="display: flex; flex-direction: column; gap: 16px; padding: 20px 0">
+<span class="chap-n" style="font-family: 'JetBrains Mono', monospace; font-size: 15px; font-weight: 600; color: #0A7A55">02 · Versions</span>
+<h3 style="margin: 0; font-size: 52px; line-height: 1.04; letter-spacing: -0.04em; font-weight: 900; color: #15191D">The right version. Every time.</h3>
+<p style="margin: 0; font-size: 20px; line-height: 1.55; color: #5B6570; max-width: 480px">Extended, Original or Radio Edit? DeckReady compares the length of your file with every version on Beatport and picks the one you actually have.</p>
+</div>
+</div>
+<div class="chap-wrap" style="min-height: 82vh; display: flex; flex-direction: column; justify-content: center">
+<div class="chap" style="display: flex; flex-direction: column; gap: 16px; padding: 20px 0">
+<span class="chap-n" style="font-family: 'JetBrains Mono', monospace; font-size: 15px; font-weight: 600; color: #0A7A55">03 · Review</span>
+<h3 style="margin: 0; font-size: 52px; line-height: 1.04; letter-spacing: -0.04em; font-weight: 900; color: #15191D">Doubtful? You decide.</h3>
+<p style="margin: 0; font-size: 20px; line-height: 1.55; color: #5B6570; max-width: 480px">Close calls wait in Review Manually. Listen to your file and the Beatport preview, compare the waveforms and choose another version in one click.</p>
+</div>
+</div>
+<div class="chap-wrap" style="min-height: 82vh; display: flex; flex-direction: column; justify-content: center">
+<div class="chap" style="display: flex; flex-direction: column; gap: 16px; padding: 20px 0">
+<span class="chap-n" style="font-family: 'JetBrains Mono', monospace; font-size: 15px; font-weight: 600; color: #0A7A55">04 · Tags</span>
+<h3 style="margin: 0; font-size: 52px; line-height: 1.04; letter-spacing: -0.04em; font-weight: 900; color: #15191D">Every tag, your way.</h3>
+<p style="margin: 0; font-size: 20px; line-height: 1.55; color: #5B6570; max-width: 480px">Before writing you see all the tags in your files. Take each one from Beatport, keep your own, or remove junk like promo-site comments. Click the rows to try it.</p>
+</div>
+</div>
+<div class="chap-wrap" style="min-height: 82vh; display: flex; flex-direction: column; justify-content: center">
+<div class="chap" style="display: flex; flex-direction: column; gap: 16px; padding: 20px 0">
+<span class="chap-n" style="font-family: 'JetBrains Mono', monospace; font-size: 15px; font-weight: 600; color: #0A7A55">05 · Duplicates</span>
+<h3 style="margin: 0; font-size: 52px; line-height: 1.04; letter-spacing: -0.04em; font-weight: 900; color: #15191D">Duplicates, gone.</h3>
+<p style="margin: 0; font-size: 20px; line-height: 1.55; color: #5B6570; max-width: 480px">Find copies of the same track across all your folders, hear them side by side and send the extras to the Trash — never deleted for good.</p>
+</div>
+</div>
+<div class="chap-wrap" style="min-height: 82vh; display: flex; flex-direction: column; justify-content: center">
+<div class="chap" style="display: flex; flex-direction: column; gap: 16px; padding: 20px 0">
+<span class="chap-n" style="font-family: 'JetBrains Mono', monospace; font-size: 15px; font-weight: 600; color: #0A7A55">06 · Formats</span>
+<h3 style="margin: 0; font-size: 52px; line-height: 1.04; letter-spacing: -0.04em; font-weight: 900; color: #15191D">Every format you play.</h3>
+<p style="margin: 0; font-size: 20px; line-height: 1.55; color: #5B6570; max-width: 480px">MP3, FLAC, AIFF and WAV. DeckReady writes title, artist, album, genre, BPM, key, label, date, catalog number and artwork — in the right place for each format. WAV gets both ID3 and RIFF INFO, so every app can read it.</p>
+</div>
+</div>
+<div class="chap-wrap" style="min-height: 82vh; display: flex; flex-direction: column; justify-content: center">
+<div class="chap" style="display: flex; flex-direction: column; gap: 16px; padding: 20px 0">
+<span class="chap-n" style="font-family: 'JetBrains Mono', monospace; font-size: 15px; font-weight: 600; color: #0A7A55">07 · DJ apps</span>
+<h3 style="margin: 0; font-size: 52px; line-height: 1.04; letter-spacing: -0.04em; font-weight: 900; color: #15191D">Ready for your DJ software.</h3>
+<p style="margin: 0; font-size: 20px; line-height: 1.55; color: #5B6570; max-width: 480px">No more cryptic file names and empty columns. After DeckReady, rekordbox, Serato and Traktor show proper titles, artists, BPM, key, genre and artwork as soon as they re-read the tags.</p>
+</div>
+</div>
+<div class="chap-wrap" style="min-height: 82vh; display: flex; flex-direction: column; justify-content: center">
+<div class="chap" style="display: flex; flex-direction: column; gap: 16px; padding: 20px 0">
+<span class="chap-n" style="font-family: 'JetBrains Mono', monospace; font-size: 15px; font-weight: 600; color: #0A7A55">08 · Platforms</span>
+<h3 style="margin: 0; font-size: 52px; line-height: 1.04; letter-spacing: -0.04em; font-weight: 900; color: #15191D">Mac, Intel or Windows. Always up to date.</h3>
+<p style="margin: 0; font-size: 20px; line-height: 1.55; color: #5B6570; max-width: 480px">Native apps for Apple silicon, Intel Macs and Windows. New versions download and install themselves.</p>
+</div>
+</div>
+</div>
 
-      <div class="flist">
-        <article class="feat rv">
-          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
-          <div>
-            <h3>Matching that understands mixes</h3>
-            <p>Tells an Original from an Extended, handles remixes, edits and feat. artists — so each file gets the right version, not just the closest title.</p>
-          </div>
-        </article>
+<!-- sticky window -->
+<div class="sticky-col" style="position: sticky; top: 84px">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 18px">
+<div class="stage" id="stage" style="position: relative; width: 640px; height: 460px; border-radius: 14px; border: 1px solid #DCE0E4; background: #FFFFFF; box-shadow: 0 40px 90px rgba(21,25,29,.14); overflow: hidden; font-size: 12.5px">
+<div style="height: 32px; box-sizing: border-box; display: flex; align-items: center; gap: 7px; padding: 0 12px; background: #F6F7F8; border-bottom: 1px solid #DCE0E4">
+<span style="width: 10px; height: 10px; border-radius: 50%; background: #FF5F57"></span><span style="width: 10px; height: 10px; border-radius: 50%; background: #FEBC2E"></span><span style="width: 10px; height: 10px; border-radius: 50%; background: #28C840"></span>
+<span id="win-title" style="margin: 0 auto; font-size: 11.5px; color: #5B6570; font-weight: 500">DeckReady</span>
+</div>
+<span id="st-recs" style="display: contents"></span><span id="st-notes" style="display: contents"></span><span id="st-badge" style="display: contents"></span>
+</div>
 
-        <article class="feat rv">
-          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h3l2-7 4 14 3-9 2 2h4"/></svg></span>
-          <div>
-            <h3>See the match before you commit</h3>
-            <p>Dual waveforms and a side-by-side genre view — your file next to Beatport — so you confirm the track is right, then write.</p>
-          </div>
-        </article>
+<!-- chapter buttons -->
+<nav aria-label="Chapters" class="side-nav" style="display: flex; gap: 6px; flex-wrap: wrap; justify-content: center">
+<button type="button" class="navdot on" data-go="0">Analyze</button>
+<button type="button" class="navdot" data-go="1">Versions</button>
+<button type="button" class="navdot" data-go="2">Review</button>
+<button type="button" class="navdot" data-go="3">Tags</button>
+<button type="button" class="navdot" data-go="4">Duplicates</button>
+<button type="button" class="navdot" data-go="5">Formats</button>
+<button type="button" class="navdot" data-go="6">DJ apps</button>
+<button type="button" class="navdot" data-go="7">Platforms</button>
+</nav>
+</div>
+</div>
+</div>
+</div>
+</section>
 
-        <article class="feat rv">
-          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h11l5 5v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z"/><path d="M14 4v5h5"/><path d="M8 13h8M8 17h8"/></svg></span>
-          <div>
-            <h3>Writes straight to your files</h3>
-            <p>Tags MP3, FLAC, AIFF and WAV in place, artwork included. No re-export, no rebuilding your library from scratch.</p>
-          </div>
-        </article>
-
-        <article class="feat rv">
-          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 4v5c0 5-3.5 8-9 9-5.5-1-9-4-9-9V7z"/><path d="M12 8v4M12 15h.01"/></svg></span>
-          <div>
-            <h3>Catches the wrong file</h3>
-            <p>Flags length mismatches and other issues so a cut, radio or mislabelled version doesn't quietly end up in your set.</p>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="download" id="get">
-    <div class="wrap rv">
-      <h2>Tag your first crate tonight.</h2>
-      <p>Free to download. Runs on macOS and Windows.</p>
-      <div class="cta-row">
-        <a class="btn btn-primary mag" href="https://github.com/mid30084/deckready-releases/releases/latest/download/DeckReady-mac.dmg">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 12.9c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9s-1.8-.8-3-.8c-1.5 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.2 0 2-1.1 2.8-2.2.9-1.3 1.2-2.5 1.3-2.6-.1 0-2.5-1-2.5-3.8zM14.2 5.9c.6-.8 1.1-1.9.9-3-1 0-2.2.6-2.9 1.5-.6.7-1.1 1.8-1 2.9 1.1.1 2.3-.6 3-1.4z"/></svg>
-          <span class="btn-label"><span>Download for Mac<span id="mac-version" style="font-size:0.75em; opacity:0.7; margin-left:0.4em;"></span></span><span class="btn-sub">Apple silicon · M1 and newer</span></span>
-        </a>
-        <a class="btn btn-ghost mag" href="https://github.com/mid30084/deckready-releases/releases/latest/download/DeckReady-mac-intel.dmg">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 12.9c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9s-1.8-.8-3-.8c-1.5 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.2 0 2-1.1 2.8-2.2.9-1.3 1.2-2.5 1.3-2.6-.1 0-2.5-1-2.5-3.8zM14.2 5.9c.6-.8 1.1-1.9.9-3-1 0-2.2.6-2.9 1.5-.6.7-1.1 1.8-1 2.9 1.1.1 2.3-.6 3-1.4z"/></svg>
-          <span class="btn-label"><span>Download for Mac (Intel)<span id="mac-intel-version" style="font-size:0.75em; opacity:0.7; margin-left:0.4em;"></span></span><span class="btn-sub">Intel processor</span></span>
-        </a>
-        <small class="dl-note">Needs macOS 12 or newer. Which Mac do I have? Apple menu → About This Mac: “Chip: Apple M…” = Apple silicon, “Processor: …Intel…” = Intel.</small>
-        <a class="btn btn-ghost mag" href="https://github.com/mid30084/deckready-releases/releases/latest/download/DeckReady-Setup.exe">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 5.7 10.5 4.7v6.6H3zM11.5 4.5 21 3.2v8.1h-9.5zM3 12.7h7.5v6.6L3 18.3zM11.5 12.7H21v8.1l-9.5-1.3z"/></svg>
-          Download for Windows<span id="win-version" style="font-size:0.75em; opacity:0.7; margin-left:0.4em;"></span>
-        </a>
-      </div>
-    </div>
-  </section>
+<!-- DOWNLOAD -->
+<section id="download" style="max-width: 1240px; margin: 0 auto; padding: 120px 24px 120px">
+<div class="dl-box" style="position: relative; border-radius: 28px; background: radial-gradient(120% 120% at 50% 0%, #E9F8F0 0%, #F4F6F7 70%); border: 1px solid #DCE0E4; padding: 72px 36px; overflow: hidden">
+<div aria-hidden="true" class="spin-slow" style="position: absolute; right: -170px; top: -190px; width: 440px; height: 440px; border-radius: 50%; background: repeating-radial-gradient(circle, #DDE3E7 0 2px, #EEF1F3 2px 5px)"><span style="position: absolute; inset: 160px; border-radius: 50%; background: #2EE59D"></span><span style="position: absolute; inset: 206px; border-radius: 50%; background: #F4F6F7"></span></div>
+<div aria-hidden="true" class="spin-slow" style="position: absolute; left: -130px; bottom: -160px; width: 320px; height: 320px; border-radius: 50%; background: repeating-radial-gradient(circle, #DDE3E7 0 2px, #EEF1F3 2px 5px); animation-direction: reverse"><span style="position: absolute; inset: 116px; border-radius: 50%; background: #B9DDCB"></span></div>
+<div style="position: relative; display: flex; flex-direction: column; gap: 14px; align-items: center; text-align: center">
+<h2 class="dl-h2" style="margin: 0; font-size: 56px; letter-spacing: -0.04em; line-height: 1.04; font-weight: 900">Get your crate deck-ready.</h2>
+<p style="margin: 0; color: #5B6570; font-size: 18px">Free download<span id="dl-ver" hidden> · version <span id="dl-version"></span></span></p>
+</div>
+<div class="three-col" style="position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 40px">
+<a href="https://github.com/mid30084/deckready-releases/releases/latest/download/DeckReady-mac.dmg" class="dl-card" style="display: flex; align-items: center; gap: 16px; padding: 20px; border-radius: 18px; text-decoration: none; background: #0A7A55; color: #FFFFFF;">
+<span class="dl-icon" style="width: 52px; height: 52px; border-radius: 14px; background: rgba(255,255,255,.16); color: #FFFFFF; display: flex; align-items: center; justify-content: center; flex: none"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5h14v10H5zM3 19h18M9 9h6v2H9z"></path></svg></span>
+<span style="display: flex; flex-direction: column; gap: 2px"><b style="font-size: 18px; font-weight: 700">Mac</b><span style="font-size: 13px; color: rgba(255,255,255,.8)">Apple silicon · M1 and newer</span></span>
+<span class="dl-arrow" style="margin-left: auto; width: 38px; height: 38px; border-radius: 50%; background: #2EE59D; color: #04140D; display: flex; align-items: center; justify-content: center; flex: none"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v13M6 11l6 6 6-6"></path></svg></span>
+</a>
+<a href="https://github.com/mid30084/deckready-releases/releases/latest/download/DeckReady-mac-intel.dmg" class="dl-card" style="display: flex; align-items: center; gap: 16px; padding: 20px; border-radius: 18px; text-decoration: none; background: #FFFFFF; color: #15191D; border: 1px solid #DCE0E4;">
+<span class="dl-icon" style="width: 52px; height: 52px; border-radius: 14px; background: #E3F4EC; color: #0A7A55; display: flex; align-items: center; justify-content: center; flex: none"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5h14v10H5zM3 19h18"></path></svg></span>
+<span style="display: flex; flex-direction: column; gap: 2px"><b style="font-size: 18px; font-weight: 700">Mac</b><span style="font-size: 13px; color: #5B6570">Intel processor</span></span>
+<span class="dl-arrow" style="margin-left: auto; width: 38px; height: 38px; border-radius: 50%; background: #0A7A55; color: #FFFFFF; display: flex; align-items: center; justify-content: center; flex: none"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v13M6 11l6 6 6-6"></path></svg></span>
+</a>
+<a href="https://github.com/mid30084/deckready-releases/releases/latest/download/DeckReady-Setup.exe" class="dl-card" style="display: flex; align-items: center; gap: 16px; padding: 20px; border-radius: 18px; text-decoration: none; background: #FFFFFF; color: #15191D; border: 1px solid #DCE0E4;">
+<span class="dl-icon" style="width: 52px; height: 52px; border-radius: 14px; background: #E3F4EC; color: #0A7A55; display: flex; align-items: center; justify-content: center; flex: none"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5l7-1v7H4zM13 4l7-1v8h-7zM4 13h7v7l-7-1zM13 13h7v8l-7-1z"></path></svg></span>
+<span style="display: flex; flex-direction: column; gap: 2px"><b style="font-size: 18px; font-weight: 700">Windows</b><span style="font-size: 13px; color: #5B6570">Windows 10 and 11</span></span>
+<span class="dl-arrow" style="margin-left: auto; width: 38px; height: 38px; border-radius: 50%; background: #0A7A55; color: #FFFFFF; display: flex; align-items: center; justify-content: center; flex: none"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v13M6 11l6 6 6-6"></path></svg></span>
+</a>
+</div>
+<p style="position: relative; margin: 22px 0 0; text-align: center; font-size: 13px; color: #5B6570">Needs macOS 12 or newer. Which Mac? Apple menu → About This Mac: “Chip: Apple M…” = Apple silicon, “Processor: Intel” = Intel.</p>
+</div>
+</section>
 </main>
 
-<footer>
-  <div class="wrap foot-inner">
-    <span>© 2026 DeckReady · Created by DJ Dimitri Aless</span>
-    <a href="/privacy/">Privacy</a>
-  </div>
-  <div class="wrap" style="margin-top:14px">
-    <p class="disclaimer">DeckReady is an independent tool and is not affiliated with, endorsed by, or connected to Beatport. Beatport is a trademark of its respective owner.</p>
-  </div>
+<footer style="border-top: 1px solid #ECEEF1">
+<div style="max-width: 1240px; margin: 0 auto; padding: 24px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 13px; color: #5B6570"><span>© 2026 DeckReady · Created by DJ Dimitri Aless</span><a href="/privacy/">Privacy</a></div>
+<div style="max-width: 1240px; margin: 0 auto; padding: 0 24px 24px; font-size: 12px; line-height: 1.5; color: #5B6570"><p style="margin: 0; max-width: 640px">DeckReady is an independent tool and is not affiliated with, endorsed by, or connected to Beatport. Beatport is a trademark of its respective owner.</p></div>
 </footer>
 
-<script>
-  // Highlight the button for the visitor's OS (downloads still work without JS).
-  (function(){
-    var p=(navigator.userAgentData&&navigator.userAgentData.platform||navigator.platform||"").toLowerCase();
-    var win=/win/.test(p);
-    var m=document.getElementById('dl-mac'), w=document.getElementById('dl-win');
-    if(!m||!w)return;
-    if(win){ w.classList.add('btn-primary');w.classList.remove('btn-ghost');
-             m.classList.add('btn-ghost');m.classList.remove('btn-primary'); }
-    // mac is primary by default already. No "for your Mac" chip: a browser can't tell Apple
-    // silicon from Intel (both report "Mac"), the note under the Mac buttons tells how to check.
-    if(win){ w.insertAdjacentHTML('beforeend','<span class="rec">for your PC</span>'); }
-  })();
-</script>
-<script>
-  fetch("https://api.github.com/repos/mid30084/deckready-releases/releases/latest")
-    .then(r => r.json())
-    .then(data => {
-      const assets = data.assets || [];
-      // exact names: "mac" alone would also match DeckReady-mac-intel.dmg
-      const mac = assets.find(a => a.name === "DeckReady-mac.dmg");
-      const macIntel = assets.find(a => a.name === "DeckReady-mac-intel.dmg");
-      const win = assets.find(a => a.name.includes("Setup") || a.name.includes("win"));
-      const tag = data.tag_name || "";
-
-      // обе пары кнопок на странице (hero + финальный CTA "download" секция) —
-      // одна и та же проверка наличия ассета применяется к обеим парам, ни
-      // одна кнопка не остаётся без версии (расширено сверх дословного
-      // скрипта задачи, который знал только про mac-version/win-version —
-      // см. KNOWLEDGE.md)
-      ["mac-version", "mac-version-hero"].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.textContent = mac ? tag : "";
-      });
-      ["mac-intel-version", "mac-intel-version-hero"].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.textContent = macIntel ? tag : "";
-      });
-      ["win-version", "win-version-hero"].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.textContent = win ? tag : "";
-      });
-    })
-    .catch(() => {});
-</script>
-<script>
-(function(){
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var touch = window.matchMedia('(hover: none)').matches;
-  var B = document.body, root = document.documentElement;
-  var fx = {wave:1,glow:1,demo:1,tilt:1,reveal:1};
-
-  function apply(){ Object.keys(fx).forEach(function(k){ B.classList.toggle('fx-'+k, !!fx[k]); }); }
-  apply();
-
-  /* pointer tracking (shared) */
-  var px = -9999, py = -9999, pIn = false;
-  window.addEventListener('pointermove', function(e){
-    px = e.clientX; py = e.clientY; pIn = true;
-    if(fx.glow){ root.style.setProperty('--mx', px+'px'); root.style.setProperty('--my', py+'px'); }
-  }, {passive:true});
-  document.addEventListener('pointerleave', function(){ pIn = false; });
-
-  /* ---- 1 + 3. waveform inside the demo card ---- */
-  var cv = document.getElementById('wf'), ctx = cv.getContext('2d'), wrap = cv.parentNode;
-  var W=0,H=0,dpr=1,bars=[],N=0, play=0, hx=-1, LEN=322;
-  function env(u){ // rough shape of a club track: intro, build, groove, breakdown, drop, outro
-    if(u<.1) return .32; if(u<.28) return .32+(u-.1)/.18*.5; if(u<.55) return .86;
-    if(u<.64) return .26; if(u<.9) return .95; return .95-(u-.9)/.1*.6;
-  }
-  function size(){
-    dpr = Math.min(window.devicePixelRatio||1,2); W = cv.clientWidth; H = cv.clientHeight;
-    cv.width = W*dpr; cv.height = H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0);
-    N = Math.max(60, Math.floor(W/4)); bars = [];
-    for(var i=0;i<N;i++){ var u=i/N, j=.55+.45*Math.abs(Math.sin(i*12.9898)*Math.cos(i*4.1414)); bars.push({a:env(u)*j, h:env(u)*j}); }
-  }
-  size(); window.addEventListener('resize', size);
-  function fmt(s){ s=Math.max(0,Math.round(s)); return Math.floor(s/60)+':'+('0'+s%60).slice(-2); }
-  var posEl = document.getElementById('wf-pos');
-  wrap.addEventListener('pointermove', function(e){ var r=cv.getBoundingClientRect(); hx = e.clientX - r.left; });
-  wrap.addEventListener('pointerleave', function(){ hx = -1; });
-  var C={}; function readC(){ var cs=getComputedStyle(document.documentElement); ['acc-rgb','muted-rgb','amber','ink'].forEach(function(k){C[k]=cs.getPropertyValue('--'+k).trim();}); }
-  readC(); window.__readC=readC;
-  function draw(){
-    requestAnimationFrame(draw);
-    ctx.clearRect(0,0,W,H);
-    var mid = H/2 - 4, step = W/N, bw = Math.max(1.5, step*.6), px = play*W;
-    for(var i=0;i<N;i++){
-      var b = bars[i], x = i*step + step/2, target = b.a;
-      if(fx.wave && hx>=0 && !reduce){ var d = x-hx; target = Math.min(1, b.a*(1+.55*Math.exp(-(d*d)/(2*38*38)))); }
-      b.h += (target-b.h)*.18;
-      var h = b.h*(H*.42);
-      ctx.fillStyle = x <= px ? 'rgba('+C['acc-rgb']+',.92)' : 'rgba('+C['muted-rgb']+',.28)';
-      ctx.fillRect(x-bw/2, mid-h, bw, h*2);
-    }
-    if(play>0 && play<1){
-      var g = ctx.createLinearGradient(px-60,0,px,0); g.addColorStop(0,'rgba('+C['acc-rgb']+',0)'); g.addColorStop(1,'rgba('+C['acc-rgb']+',.22)');
-      ctx.fillStyle = g; ctx.fillRect(px-60,0,60,H);
-      ctx.fillStyle = C.amber; ctx.fillRect(px-1,0,2,H);
-    }
-    if(fx.wave && hx>=0){
-      ctx.fillStyle = 'rgba('+C['muted-rgb']+',.7)'; ctx.fillRect(hx-.5,0,1,H);
-      ctx.font = '500 10.5px "JetBrains Mono", monospace'; ctx.fillStyle = C.ink;
-      var lbl = fmt(hx/W*LEN), tw = ctx.measureText(lbl).width, lx = Math.min(W-tw-6, hx+6);
-      ctx.fillText(lbl, lx, 13);
-    }
-    posEl.textContent = fmt(play*LEN);
-  }
-  requestAnimationFrame(draw);
-
-  /* ---- 3. tagging demo timeline ---- */
-  var trk = document.getElementById('trk'), st = document.getElementById('status'), stext = document.getElementById('stext'),
-      tline = document.getElementById('tline'), chipB = document.getElementById('chip-b'), chipA = document.getElementById('chip-a'),
-      flds = [].slice.call(document.querySelectorAll('.fld')), steps = [].slice.call(document.querySelectorAll('.step')),
-      cands = [].slice.call(document.querySelectorAll('.cand')), timers = [], raf = 0;
-  function clear(){ timers.forEach(clearTimeout); timers = []; cancelAnimationFrame(raf); }
-  function later(fn, ms){ timers.push(setTimeout(fn, ms)); }
-  function tween(ms, fn, done){ var s = performance.now(); (function k(now){ var u = Math.min(1,(now-s)/ms); fn(u); if(u<1) raf = requestAnimationFrame(k); else if(done) done(); })(s); }
-  function setStep(i, state){ steps[i].classList.remove('active','done'); if(state) steps[i].classList.add(state); }
-  function setPct(c, v){ c.querySelector('.bar b').style.width = v+'%'; c.querySelector('.n').textContent = Math.round(v)+'%'; }
-  function status(cls, txt){ st.className = 'status'+(cls?' '+cls:''); stext.textContent = txt; }
-  function fill(f){ f.classList.add('on'); f.querySelector('.v').textContent = f.dataset.v; }
-  function setTitle(){ tline.innerHTML = '<span class="new">Double Disco — How It Feels</span>'; }
-  function reset(){
-    clear(); play = 0; trk.classList.remove('done');
-    steps.forEach(function(s,i){ setStep(i); });
-    cands.forEach(function(c){ c.className = 'cand'; setPct(c,0); c.querySelector('.len').classList.remove('ok'); });
-    flds.forEach(function(f){ f.classList.remove('on'); f.querySelector('.v').textContent = '—'; });
-    tline.innerHTML = '<span class="ph">— no artist · no title —</span>';
-    chipB.classList.add('on'); chipA.classList.remove('on'); status('', 'Waiting to scan');
-  }
-  function showAfter(){
-    clear(); play = 1; trk.classList.add('done');
-    steps.forEach(function(s,i){ setStep(i,'done'); });
-    cands.forEach(function(c){ c.className = 'cand in '+(c.dataset.win?'win':'lose'); setPct(c, +c.dataset.p); if(c.dataset.win) c.querySelector('.len').classList.add('ok'); });
-    flds.forEach(fill); setTitle();
-    chipB.classList.remove('on'); chipA.classList.add('on'); status('ok', '✓ Matched on Beatport · tags written');
-  }
-  var demoVis = false, idle = true;
-  function runDemo(){
-    idle = false;
-    if(reduce || !fx.demo){ showAfter(); return; }
-    reset();
-    later(function(){ setStep(0,'active'); status('busy','Reading file…');
-      tween(1700, function(u){ play = u; status('busy','Reading file… '+Math.round(u*100)+'%'); });
-    }, 300);
-    later(function(){ setStep(0,'done'); setStep(1,'active'); status('busy','Searching Beatport for “Double Disco How It Feels”…'); }, 2100);
-    cands.forEach(function(c,i){ later(function(){ c.classList.add('in'); }, 2450 + i*230); });
-    later(function(){ setStep(1,'done'); setStep(2,'active'); status('busy','Comparing mixes and track length (file is 5:22)…');
-      tween(1100, function(u){ var e = 1-Math.pow(1-u,3); cands.forEach(function(c){ setPct(c, e*(+c.dataset.p)); }); });
-    }, 3300);
-    later(function(){ cands.forEach(function(c){ c.classList.add(c.dataset.win?'win':'lose'); if(c.dataset.win) c.querySelector('.len').classList.add('ok'); });
-      setStep(2,'done'); setStep(3,'active'); status('busy','Writing tags to the file…');
-      chipB.classList.remove('on'); chipA.classList.add('on'); setTitle();
-    }, 4550);
-    flds.forEach(function(f,i){ later(function(){ fill(f); }, 4800 + i*230); });
-    later(function(){ trk.classList.add('done'); }, 4800 + flds.length*230);
-    later(function(){ setStep(3,'done'); status('ok','✓ Matched on Beatport · tags written'); }, 5300 + flds.length*230);
-    // loop: hold the finished result for a moment, then scan again (only while the card is on screen)
-    later(function(){ if(demoVis && fx.demo) runDemo(); else idle = true; }, 5300 + flds.length*230 + 3000);
-  }
-  document.getElementById('replay').addEventListener('click', runDemo);
-  showAfter(); // complete at rest; the scan plays once the card is on screen
-  if('IntersectionObserver' in window && !reduce){
-    new IntersectionObserver(function(es){ es.forEach(function(e){
-      demoVis = e.isIntersecting;
-      if(demoVis && idle && fx.demo){ idle = false; runDemo(); }
-    }); }, {threshold:.35}).observe(document.getElementById('demo'));
-  }
-
-  /* ---- 4. tilt + spotlight ---- */
-  function resetTilt(c){ c.style.setProperty('--rx','0deg'); c.style.setProperty('--ry','0deg'); }
-  document.querySelectorAll('.feat').forEach(function(c){
-    c.addEventListener('pointermove', function(e){
-      if(!fx.tilt || touch || reduce) return;
-      var r = c.getBoundingClientRect(), x = (e.clientX - r.left)/r.width, y = (e.clientY - r.top)/r.height;
-      c.style.setProperty('--fx', (x*100)+'%'); c.style.setProperty('--fy', (y*100)+'%');
-      c.style.setProperty('--ry', ((x-.5)*8).toFixed(2)+'deg');
-      c.style.setProperty('--rx', ((.5-y)*8).toFixed(2)+'deg');
-    });
-    c.addEventListener('pointerleave', function(){ resetTilt(c); });
-  });
-
-  /* ---- 5. reveal + magnetic buttons ---- */
-  if('IntersectionObserver' in window && !reduce){
-    var rvs = document.querySelectorAll('.rv');
-    var io = new IntersectionObserver(function(es){ es.forEach(function(e){
-      if(e.isIntersecting){ e.target.classList.remove('pre'); io.unobserve(e.target); }
-    }); }, {threshold:.12, rootMargin:'0px 0px -40px 0px'});
-    rvs.forEach(function(el, i){
-      var r = el.getBoundingClientRect();
-      if(r.top < window.innerHeight) return; // already on screen: leave it fully visible
-      el.classList.add('pre');
-      if(el.classList.contains('feat')) el.style.transitionDelay = ((i%2)*90)+'ms';
-      io.observe(el);
-    });
-  }
-  document.querySelectorAll('.mag').forEach(function(b){
-    b.addEventListener('pointermove', function(e){
-      if(!fx.reveal || touch || reduce) return;
-      var r = b.getBoundingClientRect();
-      b.style.setProperty('--bx', ((e.clientX - r.left - r.width/2)*0.12).toFixed(1)+'px');
-      b.style.setProperty('--by', ((e.clientY - r.top - r.height/2)*0.2).toFixed(1)+'px');
-    });
-    b.addEventListener('pointerleave', function(){ b.style.setProperty('--bx','0px'); b.style.setProperty('--by','0px'); });
-  });
-})();
-</script>
 </body>
 </html>
