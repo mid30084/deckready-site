@@ -12,98 +12,57 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="/assets/site.css">
 <style>
-  :root{
-    --bg:#0A0C0E;
-    --surface:#171B1F;
-    --surface-2:#111417;
-    --line:#262B31;
-    --ink:#ECEFF1;
-    --muted:#8C969E;
-    --aqua:#2EE59D;
-    --aqua-dim:#1F9E6C;
-    --amber:#F2B544;
-    --aqua-hi:#5CEDB4;
-    --on-aqua:#04140D;
-    --ghost:#8C969E;
-    --nav-bg:rgba(10,12,14,.82);
-    --acc-rgb:46,229,157;
-    --amb-rgb:242,181,68;
-    --muted-rgb:140,150,158;
-    --mx:50%; --my:30%;
-    --radius:12px;
-    --maxw:1080px;
-    --sans:"Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
-    --display:"Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
-    --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{
-    background:var(--bg);
-    color:var(--ink);
-    font-family:var(--sans);
-    font-size:17px;
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
-  a{color:inherit;text-decoration:none}
-  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
-  .mono{font-family:var(--mono)}
-
-  /* ---- nav ---- */
-  header.nav{
-    position:sticky;top:0;z-index:50;
-    backdrop-filter:blur(10px);
-    background:var(--nav-bg);
-    border-bottom:1px solid var(--line);
-  }
-  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
-  .brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:700;font-size:17px;letter-spacing:-.01em}
-  .brand .mark{width:28px;height:28px;flex:none}
-  .brand .w-ready{color:var(--aqua)}
-  .nav-links{display:flex;align-items:center;gap:28px;font-size:15px;color:var(--muted)}
-  .nav-links a:hover{color:var(--ink)}
-  .nav-links .btn-mini{
-    color:var(--on-aqua);background:var(--aqua);font-weight:600;
-    padding:8px 16px;border-radius:8px;
-  }
-  .nav-links .btn-mini:hover{background:var(--aqua-hi)}
-  @media(max-width:640px){.nav-links a:not(.btn-mini){display:none}}
-
-  /* ---- footer ---- */
-  footer{border-top:1px solid var(--line);padding:34px 0;color:var(--muted);font-size:14px}
-  .foot-inner{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
-  .foot-inner a:hover{color:var(--ink)}
-  .disclaimer{font-size:12.5px;max-width:60ch;line-height:1.5}
-  main,footer{position:relative;z-index:1}
-  /* ---- policy page ---- */
-  .policy{padding:64px 0 72px}
+  /* privacy page only — the light look of the main page (assets/site.css) */
+  .wrap{max-width:1240px;margin:0 auto;padding:0 24px}
+  .mono{font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace}
+  .site-head{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.82);backdrop-filter:saturate(1.6) blur(14px);-webkit-backdrop-filter:saturate(1.6) blur(14px);border-bottom:1px solid #ECEEF1}
+  .site-head .wrap{padding-top:12px;padding-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#15191D}
+  .brand:hover{color:#15191D}
+  .brand span{font-weight:800;font-size:18px;letter-spacing:-.02em}
+  .head-links{display:flex;align-items:center;gap:18px}
+  .head-links .home{color:#5B6570;text-decoration:none;font-weight:600;font-size:14px}
+  .head-links .home:hover{color:#15191D}
+  .head-links .btn{background:#15191D;color:#FFFFFF;text-decoration:none;font-weight:600;font-size:14px;padding:10px 18px;border-radius:999px;white-space:nowrap}
+  .policy{padding:72px 0 88px;background:#F4F6F7}
   .policy .wrap{max-width:760px}
-  .policy h1{font-family:var(--display);font-weight:700;font-size:clamp(34px,5vw,48px);line-height:1.08;letter-spacing:-.025em}
-  .policy .updated{color:var(--muted);font-size:14px;margin-top:10px}
-  .policy h2{font-family:var(--display);font-weight:600;font-size:22px;letter-spacing:-.01em;margin-top:40px}
-  .policy p,.policy ul{margin-top:12px;color:var(--ink)}
+  .policy h1{font-weight:800;font-size:clamp(36px,6vw,56px);line-height:1.05;letter-spacing:-.035em;margin:0}
+  .policy .updated{color:#5B6570;font-size:14px;margin:12px 0 0}
+  .policy h2{font-weight:700;font-size:22px;letter-spacing:-.015em;line-height:1.25;margin:44px 0 0}
+  .policy p,.policy ul{margin:12px 0 0;font-size:17px;line-height:1.65;color:#15191D}
   .policy ul{padding-left:22px}
   .policy li{margin-top:6px}
-  .policy a{color:var(--aqua);text-decoration:underline;text-underline-offset:3px}
-  .policy a:hover{color:var(--aqua-hi)}
+  .policy li::marker{color:#0A7A55}
+  .policy a{text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
   .policy .back{margin-top:48px}
-
+  .site-foot{border-top:1px solid #ECEEF1}
+  .site-foot .row{max-width:1240px;margin:0 auto;padding:24px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:#5B6570}
+  .site-foot .disc{max-width:1240px;margin:0 auto;padding:0 24px 24px;font-size:12px;line-height:1.5;color:#5B6570}
+  .site-foot .disc p{margin:0;max-width:640px}
+  @media (max-width:540px){
+    .wrap,.site-foot .row{padding-left:16px;padding-right:16px}
+    .site-foot .disc{padding:0 16px 24px}
+    .head-links{gap:12px}
+    .head-links .btn{padding:9px 14px}
+    .policy{padding:48px 0 64px}
+    .policy p,.policy ul{font-size:16px}
+  }
+  @media (max-width:360px){.head-links .home{display:none}}   /* logo still goes home */
 </style>
 </head>
 <body>
-<header class="nav">
-  <div class="wrap nav-inner">
-    <a class="brand" href="/">
-      <svg class="mark" viewBox="0 0 100 100" width="28" height="28" aria-hidden="true"><circle cx="45" cy="45" r="42" fill="#161A1E"/><circle cx="45" cy="45" r="30" fill="none" stroke="#2A3036" stroke-width="3"/><circle cx="45" cy="45" r="12" fill="#2EE59D"/><g transform="translate(66 70) rotate(-35)"><path d="M0 -13 H24 A5 5 0 0 1 29 -8 V8 A5 5 0 0 1 24 13 H0 L-13 0 Z" fill="#2EE59D" stroke="#0A0C0E" stroke-width="4" stroke-linejoin="round"/></g></svg>
-      <span>Deck<span class="w-ready">Ready</span></span>
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="DeckReady home">
+      <svg width="30" height="30" viewBox="0 0 40 40" aria-hidden="true"><circle cx="18" cy="20" r="16" fill="#15191D"></circle><circle cx="18" cy="20" r="11.5" fill="none" stroke="#2C3238"></circle><circle cx="18" cy="20" r="8" fill="none" stroke="#2C3238"></circle><circle cx="18" cy="20" r="3.6" fill="#2EE59D"></circle><path d="M24 22l10-10h5v5l-10 10z" fill="#2EE59D" stroke="#FFFFFF" stroke-width="1.5" stroke-linejoin="round"></path><circle cx="36" cy="15" r="1.3" fill="#15191D"></circle></svg>
+      <span>Deck<span style="color:#0A7A55">Ready</span></span>
     </a>
-    <nav class="nav-links">
-      <a href="/#features">Features</a>
-      <a href="/#get" class="btn-mini">Download</a>
+    <nav class="head-links">
+      <a class="home" href="/">Home</a>
+      <a class="btn" href="/#download">Download free</a>
     </nav>
   </div>
 </header>
@@ -155,14 +114,9 @@
   </div>
 </main>
 
-<footer>
-  <div class="wrap foot-inner">
-    <span>© 2026 DeckReady · Created by DJ Dimitri Aless</span>
-    <a href="/privacy/">Privacy</a>
-  </div>
-  <div class="wrap" style="margin-top:14px">
-    <p class="disclaimer">DeckReady is an independent tool and is not affiliated with, endorsed by, or connected to Beatport. Beatport is a trademark of its respective owner.</p>
-  </div>
+<footer class="site-foot">
+  <div class="row"><span>© 2026 DeckReady · Created by DJ Dimitri Aless</span><a href="/privacy/">Privacy</a></div>
+  <div class="disc"><p>DeckReady is an independent tool and is not affiliated with, endorsed by, or connected to Beatport. Beatport is a trademark of its respective owner.</p></div>
 </footer>
 </body>
 </html>
