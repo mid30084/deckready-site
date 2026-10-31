@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How DeckReady Works — Tag Your Tracks with Beatport</title>
+<meta name="description" content="Step by step: choose your folders, analyze on Beatport, review the result tabs, pick the right version, write the tags and reload them in your DJ software.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://deckready.pitchclub.app/how-it-works/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://deckready.pitchclub.app/how-it-works/">
+<meta property="og:title" content="How DeckReady Works — Tag Your Tracks with Beatport">
+<meta property="og:description" content="Step by step: choose your folders, analyze on Beatport, review the result tabs, pick the right version, write the tags and reload them in your DJ software.">
+<meta property="og:site_name" content="DeckReady">
+<meta property="og:image" content="https://deckready.pitchclub.app/assets/og-image.png?v=2">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="DeckReady — auto-tag your tracks with Beatport: artist, title, BPM, key, genre and artwork">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How DeckReady Works — Tag Your Tracks with Beatport">
+<meta name="twitter:description" content="Step by step: choose your folders, analyze on Beatport, review the result tabs, pick the right version, write the tags and reload them in your DJ software.">
+<meta name="twitter:image" content="https://deckready.pitchclub.app/assets/og-image.png?v=2">
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "DeckReady",
+      "item": "https://deckready.pitchclub.app/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "How it works",
+      "item": "https://deckready.pitchclub.app/how-it-works/"
+    }
+  ]
+}
+</script>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+  /* guide pages — the light look of privacy/ (assets/site.css) */
+  .wrap{max-width:1240px;margin:0 auto;padding:0 24px}
+  .mono{font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace}
+  .site-head{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.82);backdrop-filter:saturate(1.6) blur(14px);-webkit-backdrop-filter:saturate(1.6) blur(14px);border-bottom:1px solid #ECEEF1}
+  .site-head .wrap{padding-top:12px;padding-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#15191D}
+  .brand:hover{color:#15191D}
+  .brand span{font-weight:800;font-size:18px;letter-spacing:-.02em}
+  .head-links{display:flex;align-items:center;gap:18px}
+  .head-links .home{color:#5B6570;text-decoration:none;font-weight:600;font-size:14px}
+  .head-links .home:hover{color:#15191D}
+  .head-links .btn{background:#15191D;color:#FFFFFF;text-decoration:none;font-weight:600;font-size:14px;padding:10px 18px;border-radius:999px;white-space:nowrap}
+  .guide{padding:72px 0 88px;background:#F4F6F7}
+  .guide .wrap{max-width:760px}
+  .guide .kicker{font-size:14px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#0A7A55;margin:0 0 12px}
+  .guide h1{font-weight:800;font-size:clamp(34px,6vw,56px);line-height:1.05;letter-spacing:-.035em;margin:0}
+  .guide .lead{font-size:19px;line-height:1.6;color:#3A434C;margin:18px 0 0}
+  .guide h2{font-weight:700;font-size:22px;letter-spacing:-.015em;line-height:1.25;margin:44px 0 0}
+  .guide p,.guide ul,.guide ol{margin:12px 0 0;font-size:17px;line-height:1.65;color:#15191D}
+  .guide ul,.guide ol{padding-left:22px}
+  .guide li{margin-top:6px}
+  .guide li::marker{color:#0A7A55}
+  .guide a{text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
+  .ui{font-weight:600;white-space:normal}
+  .key{font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92em}
+  .faq-item h2{font-size:20px;margin-top:36px}
+  .cta{margin-top:48px;padding:28px;border-radius:20px;background:radial-gradient(120% 120% at 50% 0%,#E9F8F0 0%,#FFFFFF 75%);border:1px solid #DCE0E4}
+  .cta h2{margin:0}
+  .cta p{margin-top:8px}
+  .cta .btn{display:inline-block;margin-top:16px;background:#0A7A55;color:#FFFFFF;text-decoration:none;font-weight:700;font-size:16px;padding:13px 22px;border-radius:999px}
+  .more{margin-top:48px}
+  .more h2{margin:0}
+  .more ul{list-style:none;padding:0;margin:14px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+  .more li{margin:0}
+  .more a{display:block;padding:14px 16px;border-radius:14px;background:#FFFFFF;border:1px solid #DCE0E4;color:#15191D;font-weight:600;text-decoration:none}
+  .more a:hover{border-color:#0A7A55}
+  .site-foot{border-top:1px solid #ECEEF1}
+  .site-foot .row{max-width:1240px;margin:0 auto;padding:24px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:#5B6570}
+  .site-foot .disc{max-width:1240px;margin:0 auto;padding:0 24px 24px;font-size:12px;line-height:1.5;color:#5B6570}
+  .site-foot .disc p{margin:0;max-width:640px}
+  @media (max-width:540px){
+    .wrap,.site-foot .row{padding-left:16px;padding-right:16px}
+    .site-foot .disc{padding:0 16px 24px}
+    .head-links{gap:12px}
+    .head-links .btn{padding:9px 14px}
+    .guide{padding:48px 0 64px}
+    .guide p,.guide ul,.guide ol{font-size:16px}
+    .guide .lead{font-size:17px}
+    .cta{padding:22px 18px}
+  }
+  @media (max-width:360px){.head-links .home{display:none}}   /* logo still goes home */
+</style>
+</head>
+<body>
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="DeckReady home">
+      <svg width="30" height="30" viewBox="0 0 40 40" aria-hidden="true"><circle cx="18" cy="20" r="16" fill="#15191D"></circle><circle cx="18" cy="20" r="11.5" fill="none" stroke="#2C3238"></circle><circle cx="18" cy="20" r="8" fill="none" stroke="#2C3238"></circle><circle cx="18" cy="20" r="3.6" fill="#2EE59D"></circle><path d="M24 22l10-10h5v5l-10 10z" fill="#2EE59D" stroke="#FFFFFF" stroke-width="1.5" stroke-linejoin="round"></path><circle cx="36" cy="15" r="1.3" fill="#15191D"></circle></svg>
+      <span>Deck<span style="color:#0A7A55">Ready</span></span>
+    </a>
+    <nav class="head-links">
+      <a class="home" href="/">Home</a>
+      <a class="btn" href="/#download">Download free</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top" class="guide">
+  <div class="wrap">
+    <p class="kicker">Guide</p>
+    <h1>How DeckReady works</h1>
+    <p class="lead">DeckReady is a desktop app for macOS and Windows that finds your tracks on Beatport and writes the correct tags into the files. Here is the whole process, from a folder of badly tagged files to a library your DJ software can sort properly.</p>
+    <h2>1. Choose your music</h2>
+    <p>Click <span class="ui">Choose folder or files</span>, or drag a folder or single files straight into the window. DeckReady works with MP3, FLAC, AIFF and WAV files, so a mixed folder of downloads, promos and rips is fine.</p>
+
+    <h2>2. Analyze — nothing is written yet</h2>
+    <p>Click <span class="ui">Analyze</span>. DeckReady looks up every track on Beatport, using the artist and title from the file’s tags or from its file name. You can pause or stop the analysis at any time.</p>
+    <p>The analysis only looks for matches. No file is changed at this stage — your tags stay exactly as they were until you decide to write.</p>
+    <p>DeckReady also compares the length of your file with the versions on Beatport, so an Extended Mix is not confused with a Radio Edit of the same track. Beatport answers and artwork are cached, so analysing the same tracks again is almost instant.</p>
+
+    <h2>3. Read the result tabs</h2>
+    <p>Every track lands in one tab. The number next to a tab name is how many files it holds.</p>
+    <ul>
+      <li><span class="ui">Ready to Write</span> — the track was found on Beatport with a good match.</li>
+      <li><span class="ui">Review Manually</span> — Beatport found a similar track, but the match isn’t complete. The decision is yours.</li>
+      <li><span class="ui">No Matches</span> — Beatport found nothing. Usually the file’s tags are empty or wrong.</li>
+      <li><span class="ui">Errors</span> — the file couldn’t be processed: it is empty, damaged, missing from disk, or Beatport temporarily limited requests.</li>
+      <li><span class="ui">Processed</span> — tracks from this session whose tags are already written.</li>
+      <li><span class="ui">No Action Needed</span> — files DeckReady already processed earlier.</li>
+    </ul>
+    <p>The <span class="ui">Match</span> column shows a bar: green for a match of 95% or more, orange below that. In <span class="ui">Settings</span> you can choose how close a match must be to land in <span class="ui">Ready to Write</span>.</p>
+
+    <h2>4. Review close calls and pick the right version</h2>
+    <p>Click a row and your file’s data appears next to Beatport’s. Two waveforms sit on top of each other — your file and the Beatport preview — and a click on either one plays from that point. The lengths underneath turn green when they match and red when they differ.</p>
+    <p>If a track in <span class="ui">Review Manually</span> is right, move it to <span class="ui">Ready to Write</span>. If the version is wrong — say, the Original Mix instead of the Extended — open <span class="ui">Choose Version Manually</span>. It lists every version of the track on Beatport and highlights the ones whose length matches your file. Listen, pick one and click <span class="ui">Use as match</span>. If the right version isn’t listed, paste a Beatport track link into <span class="ui">Beatport track link:</span> and click <span class="ui">Add to list</span>.</p>
+    <p>For files in <span class="ui">No Matches</span>, fix the file name or tags and click <span class="ui">Re-analyze</span>, or add the track by its Beatport link in the same way.</p>
+
+    <h2>5. Choose which tags to write</h2>
+    <p>Check the tracks you want and click <span class="ui">Write Beatport Tags</span>. Before anything is written, the <span class="ui">Which Tags to Write</span> window opens:</p>
+    <ul>
+      <li><span class="ui">Beatport data</span> — every field has three states: take Beatport’s value, keep your own (for example, if you use your own genre system), or remove the field from the file.</li>
+      <li><span class="ui">Other tags in the files</span> — tags Beatport doesn’t have, such as a rating, DJ software markers or links. Checked tags stay in the file, unchecked ones are removed.</li>
+    </ul>
+    <p>DeckReady writes title, artist, remixer, album, genre, BPM, key, label, track number, release date, catalog number and artwork. The key is written the way Beatport names it, in short form — <span class="key">Am</span>, <span class="key">F#m</span> or <span class="key">Eb</span> — not in Camelot notation. WAV files get ID3 tags, and the basic fields — title, artist, album, genre, date and track number — are also written as RIFF INFO, so other apps can read them.</p>
+    <p>Your choice is remembered. If you uncheck <span class="ui">Ask before each write</span>, the window stops appearing and your last choice is used.</p>
+
+    <h2>6. Reload the tags in your DJ software</h2>
+    <p>DJ software doesn’t notice new tags on its own — it keeps showing the old data until it reads the files again. After writing, rescan the tags as your DJ app’s manual describes; <span class="ui">Help</span> → <span class="ui">How to Reload Tags in DJ Software…</span> reminds you. There are separate guides for <a href="/rekordbox/">rekordbox</a> and for <a href="/serato-traktor/">Serato, Traktor and Engine DJ</a>.</p>
+
+    <h2>More tools in the app</h2>
+    <ul>
+      <li><span class="ui">Find Duplicates</span> — finds copies of the same track across all analysed files, suggests which copy to keep and sends the extras to the system Trash or Recycle Bin, never deleting them for good. One copy of every track always stays.</li>
+      <li><span class="ui">Edit tags…</span> — change tags by hand, for one file or many.</li>
+      <li><span class="ui">Rename File → By Tags</span> — rename checked files using their tags.</li>
+      <li>Sessions — the last analysis is restored on the next launch, and <span class="ui">Save Session</span> / <span class="ui">Load Session</span> keep separate ones.</li>
+      <li><span class="ui">Search tracks…</span> — search all tabs at once (⌘F on Mac, Ctrl+F on Windows).</li>
+    </ul>
+    <section class="cta">
+      <h2>Get DeckReady</h2>
+      <p>Free download for macOS 12 or newer (Apple silicon and Intel) and Windows.</p>
+      <a class="btn" href="/#download">Download free</a>
+    </section>
+    <nav class="more" aria-label="More guides">
+      <h2>More guides</h2>
+      <ul>
+        <li><a href="/faq/">FAQ</a></li>
+        <li><a href="/rekordbox/">rekordbox guide</a></li>
+        <li><a href="/serato-traktor/">Serato / Traktor guide</a></li>
+        <li><a href="/">DeckReady home</a></li>
+        <li><a href="/#download">Download DeckReady</a></li>
+      </ul>
+    </nav>
+  </div>
+</main>
+
+<footer class="site-foot">
+  <div class="row"><span>© 2026 DeckReady · Created by DJ Dimitri Aless</span><span><a href="/how-it-works/">How it works</a> · <a href="/faq/">FAQ</a> · <a href="/rekordbox/">rekordbox guide</a> · <a href="/serato-traktor/">Serato / Traktor guide</a> · <a href="/privacy/">Privacy</a></span></div>
+  <div class="disc"><p>DeckReady is an independent product and is not affiliated with or endorsed by Beatport, AlphaTheta (rekordbox), Serato, Native Instruments (Traktor) or inMusic (Engine DJ). All trademarks belong to their owners.</p></div>
+</footer>
+</body>
+</html>

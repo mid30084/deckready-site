@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DeckReady for Serato, Traktor &amp; Engine DJ Libraries</title>
+<meta name="description" content="Clean Beatport tags for Serato, Traktor and Engine DJ: genre, BPM, key and artwork, while keeping the cue points and beatgrids stored in your files.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://deckready.pitchclub.app/serato-traktor/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://deckready.pitchclub.app/serato-traktor/">
+<meta property="og:title" content="DeckReady for Serato, Traktor &amp; Engine DJ Libraries">
+<meta property="og:description" content="Clean Beatport tags for Serato, Traktor and Engine DJ: genre, BPM, key and artwork, while keeping the cue points and beatgrids stored in your files.">
+<meta property="og:site_name" content="DeckReady">
+<meta property="og:image" content="https://deckready.pitchclub.app/assets/og-image.png?v=2">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="DeckReady — auto-tag your tracks with Beatport: artist, title, BPM, key, genre and artwork">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DeckReady for Serato, Traktor &amp; Engine DJ Libraries">
+<meta name="twitter:description" content="Clean Beatport tags for Serato, Traktor and Engine DJ: genre, BPM, key and artwork, while keeping the cue points and beatgrids stored in your files.">
+<meta name="twitter:image" content="https://deckready.pitchclub.app/assets/og-image.png?v=2">
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "DeckReady",
+      "item": "https://deckready.pitchclub.app/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Serato / Traktor guide",
+      "item": "https://deckready.pitchclub.app/serato-traktor/"
+    }
+  ]
+}
+</script>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+  /* guide pages — the light look of privacy/ (assets/site.css) */
+  .wrap{max-width:1240px;margin:0 auto;padding:0 24px}
+  .mono{font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace}
+  .site-head{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.82);backdrop-filter:saturate(1.6) blur(14px);-webkit-backdrop-filter:saturate(1.6) blur(14px);border-bottom:1px solid #ECEEF1}
+  .site-head .wrap{padding-top:12px;padding-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#15191D}
+  .brand:hover{color:#15191D}
+  .brand span{font-weight:800;font-size:18px;letter-spacing:-.02em}
+  .head-links{display:flex;align-items:center;gap:18px}
+  .head-links .home{color:#5B6570;text-decoration:none;font-weight:600;font-size:14px}
+  .head-links .home:hover{color:#15191D}
+  .head-links .btn{background:#15191D;color:#FFFFFF;text-decoration:none;font-weight:600;font-size:14px;padding:10px 18px;border-radius:999px;white-space:nowrap}
+  .guide{padding:72px 0 88px;background:#F4F6F7}
+  .guide .wrap{max-width:760px}
+  .guide .kicker{font-size:14px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#0A7A55;margin:0 0 12px}
+  .guide h1{font-weight:800;font-size:clamp(34px,6vw,56px);line-height:1.05;letter-spacing:-.035em;margin:0}
+  .guide .lead{font-size:19px;line-height:1.6;color:#3A434C;margin:18px 0 0}
+  .guide h2{font-weight:700;font-size:22px;letter-spacing:-.015em;line-height:1.25;margin:44px 0 0}
+  .guide p,.guide ul,.guide ol{margin:12px 0 0;font-size:17px;line-height:1.65;color:#15191D}
+  .guide ul,.guide ol{padding-left:22px}
+  .guide li{margin-top:6px}
+  .guide li::marker{color:#0A7A55}
+  .guide a{text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
+  .ui{font-weight:600;white-space:normal}
+  .key{font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92em}
+  .faq-item h2{font-size:20px;margin-top:36px}
+  .cta{margin-top:48px;padding:28px;border-radius:20px;background:radial-gradient(120% 120% at 50% 0%,#E9F8F0 0%,#FFFFFF 75%);border:1px solid #DCE0E4}
+  .cta h2{margin:0}
+  .cta p{margin-top:8px}
+  .cta .btn{display:inline-block;margin-top:16px;background:#0A7A55;color:#FFFFFF;text-decoration:none;font-weight:700;font-size:16px;padding:13px 22px;border-radius:999px}
+  .more{margin-top:48px}
+  .more h2{margin:0}
+  .more ul{list-style:none;padding:0;margin:14px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+  .more li{margin:0}
+  .more a{display:block;padding:14px 16px;border-radius:14px;background:#FFFFFF;border:1px solid #DCE0E4;color:#15191D;font-weight:600;text-decoration:none}
+  .more a:hover{border-color:#0A7A55}
+  .site-foot{border-top:1px solid #ECEEF1}
+  .site-foot .row{max-width:1240px;margin:0 auto;padding:24px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:#5B6570}
+  .site-foot .disc{max-width:1240px;margin:0 auto;padding:0 24px 24px;font-size:12px;line-height:1.5;color:#5B6570}
+  .site-foot .disc p{margin:0;max-width:640px}
+  @media (max-width:540px){
+    .wrap,.site-foot .row{padding-left:16px;padding-right:16px}
+    .site-foot .disc{padding:0 16px 24px}
+    .head-links{gap:12px}
+    .head-links .btn{padding:9px 14px}
+    .guide{padding:48px 0 64px}
+    .guide p,.guide ul,.guide ol{font-size:16px}
+    .guide .lead{font-size:17px}
+    .cta{padding:22px 18px}
+  }
+  @media (max-width:360px){.head-links .home{display:none}}   /* logo still goes home */
+</style>
+</head>
+<body>
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="DeckReady home">
+      <svg width="30" height="30" viewBox="0 0 40 40" aria-hidden="true"><circle cx="18" cy="20" r="16" fill="#15191D"></circle><circle cx="18" cy="20" r="11.5" fill="none" stroke="#2C3238"></circle><circle cx="18" cy="20" r="8" fill="none" stroke="#2C3238"></circle><circle cx="18" cy="20" r="3.6" fill="#2EE59D"></circle><path d="M24 22l10-10h5v5l-10 10z" fill="#2EE59D" stroke="#FFFFFF" stroke-width="1.5" stroke-linejoin="round"></path><circle cx="36" cy="15" r="1.3" fill="#15191D"></circle></svg>
+      <span>Deck<span style="color:#0A7A55">Ready</span></span>
+    </a>
+    <nav class="head-links">
+      <a class="home" href="/">Home</a>
+      <a class="btn" href="/#download">Download free</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top" class="guide">
+  <div class="wrap">
+    <p class="kicker">Serato, Traktor &amp; Engine DJ guide</p>
+    <h1>DeckReady for Serato, Traktor and Engine DJ</h1>
+    <p class="lead">Whatever DJ software you play with, it can only show what is in your tags. DeckReady fills them with Beatport data — and lets you keep the cue points and beatgrids your DJ app stored in the files.</p>
+    <h2>One workflow for every DJ app</h2>
+    <p>DeckReady writes standard tags into the audio files — MP3, FLAC, AIFF and WAV — so the same clean data works in Serato, Traktor, Engine DJ and any other software that reads tags:</p>
+    <ol>
+      <li>Click <span class="ui">Choose folder or files</span> and then <span class="ui">Analyze</span>. Nothing is written during the analysis.</li>
+      <li>Write the confident matches from <span class="ui">Ready to Write</span>, and check <span class="ui">Review Manually</span> for close calls; <span class="ui">Choose Version Manually</span> fixes a wrong version.</li>
+      <li>Click <span class="ui">Write Beatport Tags</span> and pick in <span class="ui">Which Tags to Write</span> which fields to take from Beatport and which to keep.</li>
+      <li>Reload the tags in your DJ software.</li>
+    </ol>
+    <p>DeckReady writes title, artist, remixer, album, genre, BPM, key, label, track number, release date, catalog number and artwork. The key is written as Beatport names it — <span class="key">Am</span>, <span class="key">F#m</span> or <span class="key">Eb</span> — not in Camelot notation.</p>
+
+    <h2>Check a match before you write</h2>
+    <p>Click any row to see your file’s data next to Beatport’s. The top waveform is your file and the bottom one is the Beatport preview; a click on either plays from that point, so you can hear in a second whether it is the same track. In the <span class="ui">Match</span> column, a green bar means a match of 95% or more, an orange one means it is worth a listen first. The lengths under the waveforms turn red when your file is noticeably longer or shorter — often a sign of another version.</p>
+
+    <h2>Keep your cue points and beatgrids</h2>
+    <p>Some DJ software stores its own data, such as cue points and beatgrids, inside the audio files. DeckReady shows such fields in the <span class="ui">Which Tags to Write</span> window under <span class="ui">Other tags in the files</span> — for example fields named “Serato …” or <span class="ui">Traktor: cues and grid</span>. Checked fields stay in the file; unchecked ones are removed. If you rely on them, make sure they are checked before you write. Your choice is remembered for the next time.</p>
+
+    <h2>Serato</h2>
+    <p>Serato reads the tags from the files, but tracks already in your library keep their old values until Serato reads them again. In Serato DJ, the Files panel has a “Rescan ID3 Tags” button that re-reads the tags of your tracks. If your version works differently, check the Serato manual.</p>
+
+    <h2>Traktor</h2>
+    <p>Traktor keeps track information in its collection. After DeckReady writes new tags, tell Traktor to read the tags from the files again — see the Traktor manual for your version. Until then, Traktor shows the values it read before.</p>
+
+    <h2>Engine DJ</h2>
+    <p>Engine DJ also keeps its own library. After writing, refresh the track information in Engine DJ so it reads the new tags from the files — the Engine DJ manual describes how for your version.</p>
+
+    <h2>WAV, AIFF and FLAC</h2>
+    <p>DeckReady writes each tag in the right place for the format. WAV files get ID3 tags, and the basic fields — title, artist, album, genre, date and track number — are also written as RIFF INFO, so different apps can read them. Lossless files are also preferred when DeckReady’s <span class="ui">Find Duplicates</span> decides which copy of a track to keep — FLAC first, then AIFF, then WAV, and MP3 last.</p>
+    <section class="cta">
+      <h2>Get DeckReady</h2>
+      <p>Free download for macOS 12 or newer (Apple silicon and Intel) and Windows.</p>
+      <a class="btn" href="/#download">Download free</a>
+    </section>
+    <nav class="more" aria-label="More guides">
+      <h2>More guides</h2>
+      <ul>
+        <li><a href="/how-it-works/">How it works</a></li>
+        <li><a href="/faq/">FAQ</a></li>
+        <li><a href="/rekordbox/">rekordbox guide</a></li>
+        <li><a href="/">DeckReady home</a></li>
+        <li><a href="/#download">Download DeckReady</a></li>
+      </ul>
+    </nav>
+  </div>
+</main>
+
+<footer class="site-foot">
+  <div class="row"><span>© 2026 DeckReady · Created by DJ Dimitri Aless</span><span><a href="/how-it-works/">How it works</a> · <a href="/faq/">FAQ</a> · <a href="/rekordbox/">rekordbox guide</a> · <a href="/serato-traktor/">Serato / Traktor guide</a> · <a href="/privacy/">Privacy</a></span></div>
+  <div class="disc"><p>DeckReady is an independent product and is not affiliated with or endorsed by Beatport, AlphaTheta (rekordbox), Serato, Native Instruments (Traktor) or inMusic (Engine DJ). All trademarks belong to their owners.</p></div>
+</footer>
+</body>
+</html>
